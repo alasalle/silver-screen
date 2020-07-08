@@ -1,11 +1,12 @@
 {
   "name": "silver-screen",
   "version": "1.0.0",
-  "description": "MERN stack movie app",
+  "description": "MERN stack + Auth0 and Overmind movie app",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "node index.js",
+    "server": "nodemon"
   },
   "keywords": [],
   "author": "Angelina La Salle",
@@ -16,5 +17,8 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mongoose": "^5.9.22"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
   }
 }
