@@ -2,11 +2,18 @@ require('dotenv').config()
 
 const express = require("express");
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 
 const DB_SECRET = process.env.DB_SECRET;
 const port = process.env.PORT || 8080;
 
 const app = express();
+
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+app.use(cookieParser());
+
 
 mongoose.connect(DB_SECRET, {
   useNewUrlParser: true,
