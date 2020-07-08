@@ -27,7 +27,7 @@ app.get("/", (req, res) => {
   res.send("Welcome to Silver Screen!")
 })
 
-app.post("/api/users/register", (req, res) => {
+app.post("/api/user/register", (req, res) => {
 
   const user = new User(req.body);
 
@@ -35,6 +35,30 @@ app.post("/api/users/register", (req, res) => {
     if(err) return res.status(400).json({success: false, err})
   })
   return res.status(200).json({success: true, user})
+})
+
+app.post("/api/user/login", (req, res) => {
+  // find the email
+
+  User.findOne({email: req.body.email}, (err, user) => {
+    if (!user) return res.status(400).json({loginSuccess: false, message: "email authentication failed"});
+  })
+
+  // compare password with pass hash
+
+  User.comparePassword(req.body.password, (err, isMatch) => {
+    if (!isMatch) {
+      return res.status(400).json({loginSuccess: false, message: "login authentication failed"});
+    }
+  })
+  // generate token
+
+  User.generateToken((err, userData) => {
+    if (err) return res.status(400).send(err);
+
+    res.cookie("x_auth", user.token).status(200).json({loginSuccess: true});
+  })
+
 })
 
 app.listen(config.port, err => {
