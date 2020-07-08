@@ -32,12 +32,12 @@ app.post("/api/users/register", (req, res) => {
   const user = new User(req.body);
 
   user.save((err, userData) => {
-    if(err) return res.json({success: false, err})
+    if(err) return res.status(400).json({success: false, err})
   })
   return res.status(200).json({success: true, user})
 })
 
 app.listen(config.port, err => {
   if (err) console.error(err);
-  console.log(`server is listening on port ${port}`);
+  console.log(`server is listening on port ${config.port}`);
 });
