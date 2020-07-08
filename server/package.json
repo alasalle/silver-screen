@@ -8,8 +8,8 @@
     "start": "node index.js"
   },
   "keywords": [],
-  "author": "Angela La Salle",
-  "license": "ISC",
+  "author": "Angelina La Salle",
+  "license": "MIT",
   "dependencies": {
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
