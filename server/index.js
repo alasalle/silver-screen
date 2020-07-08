@@ -7,7 +7,6 @@ const cookieParser = require("cookie-parser");
 const config = require("./config/key");
 
 const { User } = require("./model/user");
-const port = process.env.PORT || 8080;
 
 const app = express();
 
@@ -38,7 +37,7 @@ app.post("/api/users/register", (req, res) => {
   return res.status(200).json({success: true, user})
 })
 
-app.listen(port, err => {
+app.listen(config.port, err => {
   if (err) console.error(err);
   console.log(`server is listening on port ${port}`);
 });
