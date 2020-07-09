@@ -7,6 +7,8 @@ const cookieParser = require("cookie-parser");
 const config = require("./config/key");
 
 const { User } = require("./model/user");
+const { auth } = require("./middleware/auth");
+const user = require("./model/user");
 
 const app = express();
 
@@ -25,6 +27,17 @@ mongoose
 
 app.get("/", (req, res) => {
   res.send("Welcome to Silver Screen!");
+});
+
+app.get("/api/user/auth", auth, (req, res) => {
+  res.status(200).json({
+    isAuth: true,
+    _id: req.user._id,
+    role: req.user.role,
+    name: req.user.name,
+    lastname: req.user.lastname,
+    email: req.user.email
+  })
 });
 
 app.post("/api/user/register", (req, res) => {
