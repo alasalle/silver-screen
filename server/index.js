@@ -8,7 +8,6 @@ const config = require("./config/key");
 
 const { User } = require("./model/user");
 const { auth } = require("./middleware/auth");
-const user = require("./model/user");
 
 const app = express();
 
@@ -82,6 +81,13 @@ app.post("/api/user/login", (req, res) => {
     // generate token
   });
 });
+
+app.get("/api/user/logout", auth, (req, res) => {
+  User.findOneAndUpdate({_id: req.user._id}, {token: ""}, (err, doc) => {
+    if (err) return res.status(500).json({logoutSuccess: false, err});
+    return res.status(200).send({logoutSuccess: true})
+  })
+})
 
 app.listen(config.port, (err) => {
   if (err) console.error(err);
