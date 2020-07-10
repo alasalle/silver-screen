@@ -25,7 +25,7 @@ mongoose
   .catch((err) => console.error(err));
 
 app.get("/", (req, res) => {
-  res.send("Welcome to Silver Screen!");
+  res.json({mesage: "Welcome to Silver Screen!"});
 });
 
 app.get("/api/user/auth", auth, (req, res) => {
