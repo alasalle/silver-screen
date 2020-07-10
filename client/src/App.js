@@ -19,7 +19,7 @@ class App extends React.Component {
   getMessage() {
     axios.get('https://silver-screen.herokuapp.com/')
         .then(res => {
-          console.log(res);
+          
         this.setState({message: res.data.message})
         })
         .catch(err => {
