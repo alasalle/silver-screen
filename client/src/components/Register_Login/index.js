@@ -125,6 +125,10 @@ export default class Register_Login extends Component {
               </div>
             </div>
 
+            {this.state.errors.length > 0 && (
+              <div>{this.displayErrors(this.state.errors)}</div>
+            )}
+
             <div className="row">
               <div className="col s12">
                 <button
