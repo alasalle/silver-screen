@@ -18,9 +18,38 @@ export default class Register_Login extends Component {
         password: this.state.password
       };
 
-      if(this.isValidForm(this.state)) {
-        this.setState({errors: []})
+    if (this.isValidForm(this.state)) {
+      
+
+      this.props
+        .dispatch(loginUser(data))
+        .then((res) => {
+          if (res.payload.loginSuccess) {
+            this.props.history.push("/");
+          } else {
+            this.setState({
+              errors: [
+                ...this.state.errors,
+                "Error: password and/or email unrecognized",
+              ],
+            });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          this.setState({
+            errors: [...this.state.errors, "Error: unable to login"],
+          });
+        });
+    } else {
+      this.setState({
+        errors: [
+          ...this.state.errors,
+          "Error: incorrect email and/or password format",
+        ],
+      });
       }
+  };
 
   isValidEmail = (email) => {
     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
