@@ -29,6 +29,8 @@ export default class Register_Login extends Component {
     return false;
   };
 
+  isValidForm = ({ email, password }) => this.isValidEmail(email) && password;
+
   
   render() {
     return (
