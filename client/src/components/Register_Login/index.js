@@ -1,13 +1,35 @@
 import React, { Component } from "react";
-
 export default class Register_Login extends Component {
+  
+    state = {
+      email: "",
+      password: "",
+      errors: [],
+    };
+
+    handleChange = event => {
+      this.setState({[event.target.name]: event.target.value});
+    }
+
+    submitForm = event => {
+      event.preventDefault();
+      let data = {
+        email: this.state.email,
+        password: this.state.password
+      };
+
+      if(this.isValidForm(this.state)) {
+        this.setState({errors: []})
+      }
+    }
+  
   render() {
     return (
       <div className="container">
         <div className="row">
           <h2>Login</h2>
           <form
-            className="col 12"
+            className="col s12"
             onSubmit={(event) => this.submitForm(EventSource)}
           >
             <div className="row">
@@ -20,10 +42,10 @@ export default class Register_Login extends Component {
                   type="email"
                   className="validate"
                 />
-                <label htmlFor="email">Email</label>
+                <label htmlFor="email" style={{visibility: this.state.email !== "" ? "hidden" : null}}>Email</label>
                 <span
                   className="helper-text"
-                  data-error="Entry must be in the correct email format."
+                  data-error="Error"
                   data-success="Success"
                 />
               </div>
@@ -39,7 +61,7 @@ export default class Register_Login extends Component {
                   type="password"
                   className="validate"
                 />
-                <label htmlFor="password">Password</label>
+                <label htmlFor="password" style={{visibility: this.state.password !== "" ? "hidden" : null}}>Password</label>
                 <span
                   className="helper-text"
                   data-error="Error"
@@ -49,11 +71,19 @@ export default class Register_Login extends Component {
             </div>
 
             <div className="row">
-              <div className="col 12">
-                <button className="btn waves-effect red lighten-2" type="submit" name="action" onClick={this.submitForm}>Login</button>
-                <button className="btn waves-effect red lighten-2">Sign Up</button>
+              <div className="col s12">
+                <button
+                  className="btn waves-effect red lighten-2"
+                  type="submit"
+                  name="action"
+                  onClick={this.submitForm}
+                >
+                  Login
+                </button>
+                <button className="btn waves-effect red lighten-2">
+                  Sign Up
+                </button>
               </div>
-
             </div>
           </form>
         </div>
