@@ -1,22 +1,24 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import loginUser from "../../actions/user_actions";
-    state = {
-      email: "",
-      password: "",
-      errors: [],
+class Register_Login extends Component {
+  state = {
+    email: "",
+    password: "",
+    errors: [],
+  };
+
+  handleChange = (event) => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
+  submitForm = (event) => {
+    event.preventDefault();
+    this.setState({ errors: [] });
+    let data = {
+      email: this.state.email,
+      password: this.state.password,
     };
-
-    handleChange = event => {
-      this.setState({[event.target.name]: event.target.value});
-    }
-
-    submitForm = event => {
-      event.preventDefault();
-      let data = {
-        email: this.state.email,
-        password: this.state.password
-      };
 
     if (this.isValidForm(this.state)) {
       
@@ -48,7 +50,7 @@ import loginUser from "../../actions/user_actions";
           "Error: incorrect email and/or password format",
         ],
       });
-      }
+    }
   };
 
   isValidEmail = (email) => {
@@ -63,7 +65,7 @@ import loginUser from "../../actions/user_actions";
   displayErrors = (errors) => {
     return errors.map((err, i) => <p key={i}>{err}</p>);
   };
-  
+
   render() {
     return (
       <div className="container">
