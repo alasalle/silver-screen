@@ -83,7 +83,14 @@ export default class Register_Login extends Component {
                   type="email"
                   className="validate"
                 />
-                <label htmlFor="email" style={{visibility: this.state.email !== "" ? "hidden" : null}}>Email</label>
+                <label
+                  htmlFor="email"
+                  style={{
+                    visibility: this.state.email !== "" ? "hidden" : null,
+                  }}
+                >
+                  Email
+                </label>
                 <span
                   className="helper-text"
                   data-error="Error"
@@ -102,7 +109,14 @@ export default class Register_Login extends Component {
                   type="password"
                   className="validate"
                 />
-                <label htmlFor="password" style={{visibility: this.state.password !== "" ? "hidden" : null}}>Password</label>
+                <label
+                  htmlFor="password"
+                  style={{
+                    visibility: this.state.password !== "" ? "hidden" : null,
+                  }}
+                >
+                  Password
+                </label>
                 <span
                   className="helper-text"
                   data-error="Error"
