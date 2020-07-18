@@ -6,7 +6,7 @@ import { createStore, applyMiddleware } from "redux";
 import promiseMiddleware from "redux-promise";
 import ReduxThunk from "redux-thunk";
 
-import "./index.css";
+import "materialize-css/dist/css/materialize.min.css";
 import App from "./components/App";
 import Reducer from "./reducers"
 import * as serviceWorker from "./serviceWorker";
