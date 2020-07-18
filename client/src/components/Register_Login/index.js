@@ -60,6 +60,9 @@ export default class Register_Login extends Component {
 
   isValidForm = ({ email, password }) => this.isValidEmail(email) && password;
 
+  displayErrors = (errors) => {
+    return errors.map((err, i) => <p key={i}>{err}</p>);
+  };
   
   render() {
     return (
