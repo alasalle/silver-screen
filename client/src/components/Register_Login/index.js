@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-export default class Register_Login extends Component {
-  
+import { connect } from "react-redux";
+import loginUser from "../../actions/user_actions";
     state = {
       email: "",
       password: "",
@@ -150,3 +150,11 @@ export default class Register_Login extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
+export default connect(mapStateToProps)(Register_Login);
