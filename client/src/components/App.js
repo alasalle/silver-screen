@@ -1,16 +1,21 @@
-import React from "react";
+import React, { Suspense } from 'react';
 import { Route, Switch } from "react-router-dom";
-import Home from "./Home";
-import Register_Login from "./Register_Login";
+import LandingPage from "./views/LandingPage/LandingPage.js";
+import NavBar from "./views/NavBar/NavBar";
+import Footer from "./views/Footer/Footer"
+
 
 function App() {
   return (
-    <div>
-      <Switch>
-        <Route exact path="/" component={Home}/>
-        <Route path="/login" component={Register_Login}/>
-      </Switch>
-    </div>
+    <Suspense fallback={(<div>Loading...</div>)}>
+      <NavBar />
+      <div style={{ paddingTop: '69px', minHeight: 'calc(100vh - 80px)' }}>
+        <Switch>
+          <Route exact path="/" component={LandingPage} />
+        </Switch>
+      </div>
+      <Footer />
+    </Suspense>
   );
 }
 

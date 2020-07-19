@@ -1,5 +1,5 @@
 module.exports = {
-  mongoURI: process.env.MONGO_URI,
-  port: process.env.PORT,
-  secret: process.env.SECRET
+    mongoURI:process.env.MONGO_URI,
+    secret: process.env.SECRET,
+    port: process.env.PORT
 }
