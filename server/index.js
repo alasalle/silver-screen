@@ -35,7 +35,7 @@ const connect = mongoose.connect(config.mongoURI,
   .catch(err => console.log(err));
 
 app.use(cors())
-app.use(jwtCheck);
+// app.use(jwtCheck);
 
 
 
