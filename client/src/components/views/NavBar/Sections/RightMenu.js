@@ -9,6 +9,7 @@ function RightMenu(props) {
   const { user, isAuthenticated, isLoading, error } = useAuth0();
 
   if (error) {
+    console.error(error)
     return (
       <Menu mode={props.mode}>
         <Menu.Item key="error">
@@ -29,6 +30,7 @@ function RightMenu(props) {
   }
 
   if (isAuthenticated) {
+    console.log({USER: user})
     return (
       <Menu mode={props.mode}>
         <Menu.Item key="logout">
@@ -37,7 +39,9 @@ function RightMenu(props) {
       </Menu>
     );
   } else {
+    console.log({ERROR: error, AUTHED: isAuthenticated, USER: user})
     return (
+
       <Menu mode={props.mode}>
         <Menu.Item key="login">
           <LoginButton />
