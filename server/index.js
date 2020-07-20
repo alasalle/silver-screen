@@ -12,7 +12,7 @@ const mongoose = require("mongoose");
 var jwt = require('express-jwt');
 var jwks = require('jwks-rsa');
 
-var jwtCheck = jwt({
+const jwtCheck = jwt({
       secret: jwks.expressJwtSecret({
           cache: true,
           rateLimit: true,
@@ -78,3 +78,7 @@ if (process.env.NODE_ENV === "production") {
 app.listen(config.port, () => {
   console.log(`Server Listening on ${config.port}`)
 });
+
+module.exports = {
+  jwtCheck
+}
