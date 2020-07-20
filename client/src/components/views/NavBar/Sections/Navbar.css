@@ -16,7 +16,11 @@
 .menu__logo a {
   display: inline-block;
   font-size: 20px;
-  padding: 19px 20px;
+  padding: 11px 20px 7px 0px;
+}
+
+.menu__logo a img {
+  width: 100%;
 }
 
 .menu__container .ant-menu-item {
@@ -29,7 +33,9 @@
 
 .menu__container .ant-menu-item a,
 .menu__container .ant-menu-submenu-title a,
-.menu__container .ant-menu-item button {
+.menu__container .ant-menu-item button,
+.menu__container .ant-menu-item .auth-helper-text
+ {
   padding: 10px 15px;
 }
 

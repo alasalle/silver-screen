@@ -7,17 +7,26 @@ import LogoutButton from "../../../../Auth0/LogoutButton";
 
 function RightMenu(props) {
   const { user, isAuthenticated, isLoading, error } = useAuth0();
-  
-    if (error) {
-      console.log({ERROR: error})
-      return <div>Oops... {error.message}</div>;
-    }
-  
-    if (isLoading) {
-      return <div>Loading...</div>;
-    }
 
-  console.log({AUTH: isAuthenticated, USER: user})
+  if (error) {
+    return (
+      <Menu mode={props.mode}>
+        <Menu.Item key="error">
+          <div className="auth-helper-text">Oops...{error.message}</div>
+        </Menu.Item>
+      </Menu>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <Menu mode={props.mode}>
+        <Menu.Item key="loading">
+          <div className="auth-helper-text">Loading...</div>
+        </Menu.Item>
+      </Menu>
+    );
+  }
 
   if (isAuthenticated) {
     return (
