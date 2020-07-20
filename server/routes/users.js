@@ -1,14 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const { User } = require("../models/User");
-const { jwtCheck } = require("../index");
 
 const { auth } = require("../middleware/auth");
 
 //=================================
 //             User
 //=================================
-router.use(jwtCheck)
 
 router.post("/register", (req, res) => {
 

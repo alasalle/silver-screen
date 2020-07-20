@@ -55,7 +55,7 @@ app.get('/', (req, res) => {
   res.json({message: "Welcome to Silver Screen"})
 })
 
-app.use('/api/users', require('./routes/users'));
+app.use('/api/users', jwtCheck, require('./routes/users'));
 
 
 //use this to show the image you have in node js server to client (react js)
