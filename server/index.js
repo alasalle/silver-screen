@@ -51,6 +51,10 @@ app.get('/authorized', function (req, res) {
   res.send('Secured Resource');
 });
 
+app.get('/', (req, res) => {
+  res.json({message: "Welcome to Silver Screen"})
+})
+
 app.use('/api/users', require('./routes/users'));
 
 
