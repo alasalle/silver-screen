@@ -1,1 +1,1 @@
-export const CREATE_MOVIE = 'create_movie'
+export const REGISTER_USER = 'register_user'
