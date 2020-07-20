@@ -26,7 +26,7 @@ ReactDOM.render(
     domain="silver-screen.us.auth0.com"
     clientId="Y1H30Yb8e0q70ib3pu9Id8E9Alf7gLjD"
     redirectUri={window.location.origin}
-    audience="https://silver-screen.us.auth0.com/api/v2/"
+    audience="https://silver-screen.herokuapp.com/"
   >
     <ReduxProvider
       store={createStoreWithMiddleware(
