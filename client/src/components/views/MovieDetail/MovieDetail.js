@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { List, Avatar, Row, Col, Button } from 'antd';
 import axios from 'axios';
+import LoadingOverlay from 'react-loading-overlay';
 import { useAuth0 } from "@auth0/auth0-react";
 
 import Comments from './Sections/Comments'
@@ -31,9 +32,9 @@ function MovieDetailPage(props) {
 
         axios.post(`${beURL}/api/comments/getComments`, movieVariable)
             .then(response => {
-                console.log(response)
+                // console.log(response)
                 if (response.data.status) {
-                    console.log('response.data.comments', response.data.comments)
+                    // console.log('response.data.comments', response.data.comments)
                     setCommentLists(response.data.comments)
                 } else {
                     alert('Failed to get comments Info')
@@ -51,7 +52,7 @@ function MovieDetailPage(props) {
         fetch(endpoint)
             .then(result => result.json())
             .then(result => {
-                console.log(result)
+                // console.log(result)
                 setMovie(result)
                 setLoadingForMovie(false)
 
@@ -59,7 +60,7 @@ function MovieDetailPage(props) {
                 fetch(endpointForCasts)
                     .then(result => result.json())
                     .then(result => {
-                        console.log(result)
+                        // console.log(result)
                         setCasts(result.cast)
                     })
 
@@ -72,9 +73,9 @@ function MovieDetailPage(props) {
     const updateComment = () => {
         axios.post(`${beURL}/api/comments/getComments`, movieVariable)
             .then(response => {
-                console.log(response)
+                // console.log(response)
                 if (response.data.status) {
-                    console.log('response.data.comments', response.data.comments)
+                    // console.log('response.data.comments', response.data.comments)
                     setCommentLists(response.data.comments)
                 } else {
                     alert('Failed to get comments Info')
@@ -82,7 +83,11 @@ function MovieDetailPage(props) {
             })
     }
 
-    if (isLoading) return <div>Loading...</div>
+    if (isLoading) return <LoadingOverlay
+    active={true}
+    spinner
+    text='Loading...'
+    />
 
     return (
         <div>

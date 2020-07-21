@@ -22,24 +22,24 @@ const createStoreWithMiddleware = applyMiddleware(
 )(createStore);
 
 ReactDOM.render(
-  <Auth0Provider
-    domain="silver-screen.us.auth0.com"
-    clientId="Y1H30Yb8e0q70ib3pu9Id8E9Alf7gLjD"
-    redirectUri={window.location.origin}
-    audience="https://silver-screen.herokuapp.com/"
-  >
-    <ReduxProvider
-      store={createStoreWithMiddleware(
-        Reducer,
-        window.__REDUX_DEVTOOLS_EXTENSION__ &&
-          window.__REDUX_DEVTOOLS_EXTENSION__()
-      )}
+  <BrowserRouter>
+    <Auth0Provider
+      domain="silver-screen.us.auth0.com"
+      clientId="Y1H30Yb8e0q70ib3pu9Id8E9Alf7gLjD"
+      redirectUri={window.location.origin}
+      audience="https://silver-screen.herokuapp.com/"
     >
-      <BrowserRouter>
+      <ReduxProvider
+        store={createStoreWithMiddleware(
+          Reducer,
+          window.__REDUX_DEVTOOLS_EXTENSION__ &&
+            window.__REDUX_DEVTOOLS_EXTENSION__()
+        )}
+      >
         <App />
-      </BrowserRouter>
-    </ReduxProvider>
-  </Auth0Provider>,
+      </ReduxProvider>
+    </Auth0Provider>
+  </BrowserRouter>,
 
   document.getElementById("root")
 );

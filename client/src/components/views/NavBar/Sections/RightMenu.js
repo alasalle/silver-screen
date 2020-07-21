@@ -30,7 +30,6 @@ function RightMenu(props) {
   }
 
   if (isAuthenticated) {
-    console.log({USER: user})
     return (
       <Menu mode={props.mode}>
         <Menu.Item key="logout">
@@ -39,7 +38,7 @@ function RightMenu(props) {
       </Menu>
     );
   } else {
-    console.log({ERROR: error, AUTHED: isAuthenticated, USER: user})
+    // console.log({ERROR: error, AUTHED: isAuthenticated, USER: user})
     return (
 
       <Menu mode={props.mode}>

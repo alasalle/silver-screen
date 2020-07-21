@@ -11,7 +11,7 @@ router.post("/saveComment", (req, res) => {
     const comment = new Comment(req.body)
 
     comment.save((err, comment) => {
-        console.log(err)
+        // console.log(err)
         if (err) return res.json({ status: false, err })
 
         Comment.find({ 'user_id': comment.writer })

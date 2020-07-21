@@ -38,4 +38,15 @@ router.post("/favorited", (req, res) => {
 
 });
 
+router.post("/fetchFavorites", (req, res) => {
+
+    Favorite.find({ "userFrom": req.body.userFrom })
+        .exec((err, favorites) => {
+            if (err) return res.status(400).send(err)
+
+            res.status(200).json({ status: true, faves: favorites })
+        })
+
+});
+
 module.exports = router;

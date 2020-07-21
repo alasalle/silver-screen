@@ -29,7 +29,7 @@ function Comments(props) {
             writer: user.sub,
             postId: props.postId
         }
-        console.log(variables)
+        // console.log(variables)
 
         axios.post(`${beURL}/api/comments/saveComment`, variables)
             .then(response => {
@@ -48,10 +48,10 @@ function Comments(props) {
             <Title level={3} > Share your opinions about {props.movieTitle} </Title>
             <hr />
             {/* Comment Lists  */}
-            {console.log(props.CommentLists)}
+            {/* {console.log(props.CommentLists)} */}
 
             {props.CommentLists && props.CommentLists.map((comment, index) => {
-                console.log({COMMENT: comment})
+                // console.log({COMMENT: comment})
                 return (
                 
                 (!comment.responseTo &&
