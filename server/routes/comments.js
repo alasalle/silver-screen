@@ -1,12 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const { Comment } = require("../models/Comment");
+const { User } = require("../models/User");
 
 //=================================
 //             Subscribe
 //=================================
 
 router.post("/saveComment", (req, res) => {
+
+    const user = User.findOne({_id: req.body.writer});
+    console.log({COMMENT_USER: user})
 
     const comment = new Comment(req.body)
 

@@ -3,14 +3,14 @@ const Schema = mongoose.Schema;
 
 const commentSchema = mongoose.Schema({
     writer: {
-        type: String,
+        type: Schema.Types.ObjectId,
         ref: 'User'
     }, 
     postId: {
         type: String,
     },
     responseTo: {
-        type: String,
+        type: Schema.Types.ObjectId,
         ref: 'User'
     },
     content: {

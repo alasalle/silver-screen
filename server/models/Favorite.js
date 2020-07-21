@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const favoriteSchema = mongoose.Schema({
     userFrom: {
-        type: String,
+        type: Schema.Types.ObjectId,
         ref: 'User'
     },
     movieId : {

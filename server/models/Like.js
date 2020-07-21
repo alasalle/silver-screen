@@ -3,11 +3,11 @@ const Schema = mongoose.Schema;
 
 const likeSchema = mongoose.Schema({
    userId: {
-       type: String,
+       type: Schema.Types.ObjectId,
        ref: 'User'
    },
    commentId: {
-       type: String,
+       type: Schema.Types.ObjectId,
        ref: 'Comment'
    },
    videoId: {
