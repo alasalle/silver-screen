@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const movieSchema = mongoose.Schema({
     writer: {
-        type:Schema.Types.ObjectId,
+        type:String,
         ref: 'User'
     },
     title: {

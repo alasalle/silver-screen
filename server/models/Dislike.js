@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const dislikeSchema = mongoose.Schema({
     userId: {
-        type: Schema.Types.ObjectId,
+        type: String,
         ref: 'User'
     },
     commentId: {

@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Comment, Avatar, Button, Input } from 'antd';
 import axios from 'axios';
 import { useAuth0 } from "@auth0/auth0-react";
-import { useSelector } from 'react-redux';
 import LikeDislikes from './LikeDislikes';
 import { beURL } from "../../../../config/key";
 const { TextArea } = Input;
@@ -24,7 +23,7 @@ function SingleComment(props) {
         e.preventDefault();
 
         const variables = {
-            writer: user.ss_uid,
+            writer: user.user_id,
             postId: props.postId,
             responseTo: props.comment._id,
             content: CommentValue
@@ -33,7 +32,6 @@ function SingleComment(props) {
 
         axios.post(`${beURL}/api/comments/saveComment`, variables)
             .then(response => {
-                console.log({COMMENT_USER: response.data.COMMENT_USER});
                 if (response.data.status) {
                     setCommentValue("")
                     setOpenReply(!OpenReply)
@@ -45,7 +43,7 @@ function SingleComment(props) {
     }
 
     const actions = [
-        <LikeDislikes comment commentId={props.comment._id} userId={user.ss_uid} />,
+        <LikeDislikes comment commentId={props.comment._id} userId={user.user_id} />,
         <span onClick={openReply} key="comment-basic-reply-to">Reply</span>
     ]
 

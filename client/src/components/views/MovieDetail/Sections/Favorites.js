@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Button } from 'antd';
-import { useSelector } from 'react-redux';
 
 import { beURL } from '../../../../config/key';
 

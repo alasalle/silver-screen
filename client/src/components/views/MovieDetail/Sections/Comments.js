@@ -26,7 +26,7 @@ function Comments(props) {
 
         const variables = {
             content: Comment,
-            writer: user.ss_uid,
+            writer: user.user_id,
             postId: props.postId
         }
         console.log(variables)

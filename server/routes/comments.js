@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const { Comment } = require("../models/Comment");
-const { User } = require("../models/User");
 
 //=================================
 //             Subscribe
@@ -9,24 +8,19 @@ const { User } = require("../models/User");
 
 router.post("/saveComment", (req, res) => {
 
-    User.findOne({_id: req.body.writer}, (err, user) => {
-        if (err) return res.json({status: false})
-        return res.json({status: true, comment_user: user})
+    const comment = new Comment(req.body)
+
+    comment.save((err, comment) => {
+        console.log(err)
+        if (err) return res.json({ status: false, err })
+
+        Comment.find({ '_id': comment._id })
+            .populate('writer')
+            .exec((err, result) => {
+                if (err) return res.json({ status: false, err })
+                return res.status(200).json({ status: true, result })
+            })
     })
-
-    // const comment = new Comment(req.body)
-
-    // comment.save((err, comment) => {
-    //     console.log(err)
-    //     if (err) return res.json({ status: false, err })
-
-    //     Comment.find({ '_id': comment._id })
-    //         .populate('writer')
-    //         .exec((err, result) => {
-    //             if (err) return res.json({ status: false, err })
-    //             return res.status(200).json({ status: true, result })
-    //         })
-    // })
 })
 
 router.post("/getComments", (req, res) => {
