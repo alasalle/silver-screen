@@ -39,7 +39,8 @@
   padding: 10px 15px;
 }
 
-.menu__container .ant-menu-item button {
+.menu__container .ant-menu-item button,
+ul.ant-menu li button {
   border: 0;
   background-color: transparent
 }
@@ -91,6 +92,10 @@
   .menu__container .ant-menu-item,
   .menu__container .ant-menu-submenu-title {
     padding: 1px 20px;
+  }
+
+  ul.ant-menu li button {
+    padding: 0px
   }
 
   .menu__logo a {

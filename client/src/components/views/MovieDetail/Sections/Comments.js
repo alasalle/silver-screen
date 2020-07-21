@@ -45,7 +45,7 @@ function Comments(props) {
     return (
         <div>
             <br />
-            <Title level={3} > Share your opinions about {props.movieTitle} </Title>
+            <Title level={3} > Comments</Title>
             <hr />
             {/* Comment Lists  */}
             {/* {console.log(props.CommentLists)} */}
@@ -64,7 +64,7 @@ function Comments(props) {
 
             {props.CommentLists && props.CommentLists.length === 0 &&
                 <div style={{ display: 'flex', justifyContent:'center', alignItems:'center', height:'200px'}} >
-                    Be the first one who shares your thought about this movie
+                    Be the first to share your thought about this movie!
                 </div>
             }
 
