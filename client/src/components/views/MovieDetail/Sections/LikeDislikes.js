@@ -15,9 +15,9 @@ function LikeDislikes(props) {
     let variable = {};
 
     if (props.video) {
-        variable = { videoId: props.videoId, userId: user.user_id }
+        variable = { videoId: props.videoId, userId: user.sub}
     } else {
-        variable = { commentId: props.commentId, userId: user.user_id }
+        variable = { commentId: props.commentId, userId: user.sub }
     }
 
     
@@ -35,7 +35,7 @@ function LikeDislikes(props) {
 
                     //if I already click this like button or not 
                     response.data.likes.map(like => {
-                        if (like.userId === user.user_id) {
+                        if (like.userId === user.sub) {
                             setLikeAction('liked')
                         }
                     })
@@ -53,7 +53,7 @@ function LikeDislikes(props) {
 
                     //if I already click this like button or not 
                     response.data.dislikes.map(dislike => {
-                        if (dislike.userId === user.user_id) {
+                        if (dislike.userId === user.sub) {
                             setDislikeAction('disliked')
                         }
                     })

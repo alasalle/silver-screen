@@ -93,7 +93,7 @@ function MovieDetailPage(props) {
             <div style={{ width: '85%', margin: '1rem auto' }}>
 
                 <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                    <Favorite movieInfo={Movie} movieId={movieId} userFrom={user.user_id} />
+                    <Favorite movieInfo={Movie} movieId={movieId} userFrom={user.sub} />
                 </div>
 
 
@@ -125,7 +125,7 @@ function MovieDetailPage(props) {
                 <br />
 
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
-                    <LikeDislikes video videoId={movieId} userId={user.user_id} />
+                    <LikeDislikes video videoId={movieId} userId={user.sub} />
                 </div>
 
                 {/* Comments */}

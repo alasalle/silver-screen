@@ -19,11 +19,13 @@ function SingleComment(props) {
         setOpenReply(!OpenReply)
     }
 
+    console.log({USER_ID: user})
+
     const onSubmit = (e) => {
         e.preventDefault();
 
         const variables = {
-            writer: user.user_id,
+            writer: user.sub,
             postId: props.postId,
             responseTo: props.comment._id,
             content: CommentValue
@@ -43,7 +45,7 @@ function SingleComment(props) {
     }
 
     const actions = [
-        <LikeDislikes comment commentId={props.comment._id} userId={user.user_id} />,
+        <LikeDislikes comment commentId={props.comment._id} userId={user.sub} />,
         <span onClick={openReply} key="comment-basic-reply-to">Reply</span>
     ]
     console.log({PROPS: props})
