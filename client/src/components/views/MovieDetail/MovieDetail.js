@@ -69,8 +69,17 @@ function MovieDetailPage(props) {
             )
     }
 
-    const updateComment = (newComment) => {
-        setCommentLists(CommentLists.concat(newComment))
+    const updateComment = () => {
+        axios.post(`${beURL}/api/comments/getComments`, movieVariable)
+            .then(response => {
+                console.log(response)
+                if (response.data.status) {
+                    console.log('response.data.comments', response.data.comments)
+                    setCommentLists(response.data.comments)
+                } else {
+                    alert('Failed to get comments Info')
+                }
+            })
     }
 
     if (isLoading) return <div>Loading...</div>
