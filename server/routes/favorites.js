@@ -31,6 +31,16 @@ router.post("/favorited", (req, res) => {
   });
 });
 
+router.post("/fetchFavorites", (req, res) => {
+  Favorite.find({
+    userFrom: req.body.userFrom,
+  }).exec((err, favorites) => {
+    if (err) return res.status(400).json({status: false, err});
+
+    res.status(200).json({ status: true, faves: favorites });
+  });
+});
+
 router.post("/addToFavorites", (req, res) => {
   let fave = new Favorite(req.body);
 
