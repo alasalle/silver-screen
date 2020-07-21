@@ -9,6 +9,7 @@ import App from "./components/App";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter } from "react-router-dom";
 import { Auth0Provider } from "@auth0/auth0-react";
+import MetaTags from "react-meta-tags";
 
 import Reducer from "./_reducers";
 import { Provider as ReduxProvider } from "react-redux";
@@ -36,6 +37,14 @@ ReactDOM.render(
       )}
     >
       <BrowserRouter>
+        <MetaTags>
+          <meta
+            name="description"
+            content="Silver Screen is a movie database hobby web app created by Angela La Salle."
+          />
+          <meta property="og:title" content="Silver Screen" />
+          <meta property="og:image" content="./assets/logo_transparent.png" />
+        </MetaTags>
         <App />
       </BrowserRouter>
     </ReduxProvider>
