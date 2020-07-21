@@ -9,7 +9,6 @@ import App from "./components/App";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter } from "react-router-dom";
 import { Auth0Provider } from "@auth0/auth0-react";
-import MetaTags from "react-meta-tags";
 
 import Reducer from "./_reducers";
 import { Provider as ReduxProvider } from "react-redux";
