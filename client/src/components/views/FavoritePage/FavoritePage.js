@@ -25,10 +25,10 @@ function FavoritePage() {
 
       console.log(endpoint)
     axios
-      .post(`${beURL}/api/favorites/fetchFavorites`, user.sub)
+      .post(`${beURL}/api/favorites/fetchFavorites`, {userFrom: user.sub})
       .then((response) => {
-        if (response.data.success) {
-          setFavorites(response.data.favorites);
+        if (response.data.status) {
+          setFavorites(response.data.faves);
           setLoading(false);
         } else {
           alert("Failed to get subscription videos");

@@ -77,7 +77,7 @@ function Favorite(props) {
                 }
             })
 
-    }, [])
+    }, [FavoriteNumber, Favorited])
 
 
     return (
