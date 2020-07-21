@@ -15,7 +15,7 @@ router.post("/favoriteNumber", (req, res) => {
         .exec((err, subscribe) => {
             if (err) return res.status(400).send(err)
 
-            res.status(200).json({ success: true, subscribeNumber: subscribe.length })
+            res.status(200).json({ status: true, subscribeNumber: subscribe.length })
         })
 
 });
@@ -33,7 +33,7 @@ router.post("/favorited", (req, res) => {
                 result = true
             }
 
-            res.status(200).json({ success: true, subcribed: result })
+            res.status(200).json({ status: true, subcribed: result })
         })
 
 });

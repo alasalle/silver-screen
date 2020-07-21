@@ -11,9 +11,9 @@ router.post("/register", (req, res) => {
     const user = new User(req.body);
 
     user.save((err, doc) => {
-        if (err) return res.json({ success: false, err });
+        if (err) return res.json({ status: false, err });
         return res.status(200).json({
-            success: true, user_id: doc._id
+            status: true, user_id: doc._id
         });
     });
 });

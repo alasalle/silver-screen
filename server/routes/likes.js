@@ -17,7 +17,7 @@ router.post("/getLikes", (req, res) => {
 
   Like.find(variable).exec((err, likes) => {
     if (err) return res.status(400).send(err);
-    res.status(200).json({ success: true, likes });
+    res.status(200).json({ status: true, likes });
   });
 });
 
@@ -31,7 +31,7 @@ router.post("/getDislikes", (req, res) => {
 
   Dislike.find(variable).exec((err, dislikes) => {
     if (err) return res.status(400).send(err);
-    res.status(200).json({ success: true, dislikes });
+    res.status(200).json({ status: true, dislikes });
   });
 });
 
@@ -46,11 +46,11 @@ router.post("/upLike", (req, res) => {
   const like = new Like(variable);
   //save the like information data in MongoDB
   like.save((err, likeResult) => {
-    if (err) return res.json({ success: false, err });
+    if (err) return res.json({ status: false, err });
     //In case disLike Button is already clicked, we need to decrease the dislike by 1
     Dislike.findOneAndDelete(variable).exec((err, disLikeResult) => {
-      if (err) return res.status(400).json({ success: false, err });
-      res.status(200).json({ success: true });
+      if (err) return res.status(400).json({ status: false, err });
+      res.status(200).json({ status: true });
     });
   });
 });
@@ -64,8 +64,8 @@ router.post("/unLike", (req, res) => {
   }
 
   Like.findOneAndDelete(variable).exec((err, result) => {
-    if (err) return res.status(400).json({ success: false, err });
-    res.status(200).json({ success: true });
+    if (err) return res.status(400).json({ status: false, err });
+    res.status(200).json({ status: true });
   });
 });
 
@@ -78,8 +78,8 @@ router.post("/unDisLike", (req, res) => {
   }
 
   Dislike.findOneAndDelete(variable).exec((err, result) => {
-    if (err) return res.status(400).json({ success: false, err });
-    res.status(200).json({ success: true });
+    if (err) return res.status(400).json({ status: false, err });
+    res.status(200).json({ status: true });
   });
 });
 
@@ -94,11 +94,11 @@ router.post("/upDisLike", (req, res) => {
   const disLike = new Dislike(variable);
   //save the like information data in MongoDB
   disLike.save((err, dislikeResult) => {
-    if (err) return res.json({ success: false, err });
+    if (err) return res.json({ status: false, err });
     //In case Like Button is already clicked, we need to decrease the like by 1
     Like.findOneAndDelete(variable).exec((err, likeResult) => {
-      if (err) return res.status(400).json({ success: false, err });
-      res.status(200).json({ success: true });
+      if (err) return res.status(400).json({ status: false, err });
+      res.status(200).json({ status: true });
     });
   });
 });
