@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Button, Input, Typography, } from 'antd';
 import axios from 'axios';
-import { useSelector } from 'react-redux';
 import { useAuth0 } from '@auth0/auth0-react';
 import SingleComment from './SingleComment';
 import ReplyComment from './ReplyComment';
@@ -51,14 +50,17 @@ function Comments(props) {
             {/* Comment Lists  */}
             {console.log(props.CommentLists)}
 
-            {props.CommentLists && props.CommentLists.map((comment, index) => (
+            {props.CommentLists && props.CommentLists.map((comment, index) => {
+                console.log({COMMENT: comment})
+                return (
+                
                 (!comment.responseTo &&
                     <React.Fragment>
                         <SingleComment comment={comment} postId={props.postId} refreshFunction={props.refreshFunction} />
                         <ReplyComment CommentLists={props.CommentLists} postId={props.postId} parentCommentId={comment._id} refreshFunction={props.refreshFunction} />
                     </React.Fragment>
                 )
-            ))}
+            )})}
 
             {props.CommentLists && props.CommentLists.length === 0 &&
                 <div style={{ display: 'flex', justifyContent:'center', alignItems:'center', height:'200px'}} >

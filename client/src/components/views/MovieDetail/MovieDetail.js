@@ -73,8 +73,6 @@ function MovieDetailPage(props) {
         setCommentLists(CommentLists.concat(newComment))
     }
 
-    const url = "https://silver-screen.alasalle.com"
-
     if (isLoading) return <div>Loading...</div>
 
     return (

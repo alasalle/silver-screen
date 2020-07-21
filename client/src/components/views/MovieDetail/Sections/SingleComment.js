@@ -8,7 +8,6 @@ import { beURL } from "../../../../config/key";
 const { TextArea } = Input;
 
 function SingleComment(props) {
-    const db_user = useSelector(state => state.user);
     const { user, isAuthenticated, error, isLoading } = useAuth0();
     const [CommentValue, setCommentValue] = useState("")
     const [OpenReply, setOpenReply] = useState(false)
@@ -25,7 +24,7 @@ function SingleComment(props) {
         e.preventDefault();
 
         const variables = {
-            writer: db_user.userData._id,
+            writer: user.ss_uid,
             postId: props.postId,
             responseTo: props.comment._id,
             content: CommentValue
@@ -34,7 +33,7 @@ function SingleComment(props) {
 
         axios.post(`${beURL}/api/comments/saveComment`, variables)
             .then(response => {
-                if (response.data.success) {
+                if (response.data.status) {
                     setCommentValue("")
                     setOpenReply(!OpenReply)
                     props.refreshFunction(response.data.result)
@@ -45,7 +44,7 @@ function SingleComment(props) {
     }
 
     const actions = [
-        <LikeDislikes comment commentId={props.comment._id} userId={user.user_metadata.ss_uid} />,
+        <LikeDislikes comment commentId={props.comment._id} userId={user.ss_uid} />,
         <span onClick={openReply} key="comment-basic-reply-to">Reply</span>
     ]
 
