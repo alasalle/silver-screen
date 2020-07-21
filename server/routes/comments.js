@@ -9,8 +9,9 @@ const { User } = require("../models/User");
 
 router.post("/saveComment", (req, res) => {
 
-    const user = User.findOne({_id: req.body.writer});
-    res.json({COMMENT_USER: user})
+    User.findOne({_id: req.body.writer})
+        .then( response => res.json({COMMENT_USER: response.body.user}))
+        .catch(err => res.json(err))
 
     // const comment = new Comment(req.body)
 
