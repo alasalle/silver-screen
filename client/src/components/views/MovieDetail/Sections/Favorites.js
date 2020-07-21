@@ -45,7 +45,7 @@ function Favorite(props) {
         } else {
             // when we are not subscribed yet
 
-            axios.post(`${beURL}/api/favorites/addToFavorite`, variables)
+            axios.post(`${beURL}/api/favorites/addToFavorites`, variables)
                 .then(response => {
                     if (response.data.status) {
                         setFavoriteNumber(FavoriteNumber + 1)

@@ -44,7 +44,7 @@ router.post("/addToFavorites", (req, res) => {
 router.post("/removeFromFavorite", (req, res) => {
     
   
-    Fave.deleteOne({movieId: req.body.movieId, userFrom: req.body.userFrom}, (err) => {
+    Favorite.deleteOne({movieId: req.body.movieId, userFrom: req.body.userFrom}, (err) => {
       if (err) return res.json({ status: false, err });
   
       return res.status(200).json({ status: true});
