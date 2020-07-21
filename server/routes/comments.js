@@ -14,7 +14,7 @@ router.post("/saveComment", (req, res) => {
         console.log(err)
         if (err) return res.json({ status: false, err })
 
-        Comment.find({ 'user_id': comment.user_id })
+        Comment.find({ 'user_id': comment.writer })
             .populate('writer')
             .exec((err, result) => {
                 if (err) return res.json({ status: false, err })
