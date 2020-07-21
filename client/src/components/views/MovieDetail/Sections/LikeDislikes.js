@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Tooltip, Icon } from 'antd';
+import { Tooltip } from 'antd';
+import {LikeTwoTone, DislikeTwoTone} from "@ant-design/icons"
 import axios from 'axios';
 import { useAuth0 } from '@auth0/auth0-react';
 
@@ -163,19 +164,18 @@ function LikeDislikes(props) {
         <React.Fragment>
             <span key="comment-basic-like">
                 <Tooltip title="Like">
-                    <Icon type="like"
-                        theme={LikeAction === 'liked' ? 'filled' : 'outlined'}
+                    <LikeTwoTone
+                        twoToneColor={LikeAction === 'liked' ? '#1890ff' : '#344655'}
                         onClick={onLike} />
                 </Tooltip>
                 <span style={{ paddingLeft: '8px', cursor: 'auto' }}>{Likes}</span>
             </span>&nbsp;&nbsp;&nbsp;&nbsp;
             <span key="comment-basic-dislike">
                 <Tooltip title="Dislike">
-                    <Icon
-                        type="dislike"
-                        theme={DislikeAction === 'disliked' ? 'filled' : 'outlined'}
-                        onClick={onDisLike}
-                    />
+                <DislikeTwoTone
+                        twoToneColor={DislikeAction === 'disliked' ? '#1890ff' : 
+                        '#344655'}
+                        onClick={onDisLike} />
                 </Tooltip>
                 <span style={{ paddingLeft: '8px', cursor: 'auto' }}>{Dislikes}</span>
             </span>
