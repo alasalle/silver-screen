@@ -10,21 +10,21 @@ const { User } = require("../models/User");
 router.post("/saveComment", (req, res) => {
 
     const user = User.findOne({_id: req.body.writer});
-    console.log({COMMENT_USER: user})
+    res.json({COMMENT_USER: user})
 
-    const comment = new Comment(req.body)
+    // const comment = new Comment(req.body)
 
-    comment.save((err, comment) => {
-        console.log(err)
-        if (err) return res.json({ status: false, err })
+    // comment.save((err, comment) => {
+    //     console.log(err)
+    //     if (err) return res.json({ status: false, err })
 
-        Comment.find({ '_id': comment._id })
-            .populate('writer')
-            .exec((err, result) => {
-                if (err) return res.json({ status: false, err })
-                return res.status(200).json({ status: true, result })
-            })
-    })
+    //     Comment.find({ '_id': comment._id })
+    //         .populate('writer')
+    //         .exec((err, result) => {
+    //             if (err) return res.json({ status: false, err })
+    //             return res.status(200).json({ status: true, result })
+    //         })
+    // })
 })
 
 router.post("/getComments", (req, res) => {
