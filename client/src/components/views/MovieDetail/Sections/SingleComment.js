@@ -1,91 +1,132 @@
-import React, { useState } from 'react'
-import { Comment, Avatar, Button, Input } from 'antd';
-import axios from 'axios';
+import React, { useState } from "react";
+import { Button, Input, Typography, Divider, Form, Avatar, Comment } from "antd";
+import { CloseSquareTwoTone, CheckSquareTwoTone } from "@ant-design/icons";
+import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
-import LikeDislikes from './LikeDislikes';
+import LikeDislikes from "./LikeDislikes";
 import { beURL } from "../../../../config/key";
 import { emailTrim } from "../../../../functions/emailtrim";
+import logo from "../../../../assets/logo_edit.png";
+
 const { TextArea } = Input;
 
 function SingleComment(props) {
-    const { user, isAuthenticated, error, isLoading } = useAuth0();
+  const { user, isAuthenticated, error, isLoading } = useAuth0();
+  const { stateSetter, openComment, refreshFunction } = props;
+  const username = emailTrim(user.email);
+  const [CommentValue, setCommentValue] = useState("");
+  const [OpenReply, setOpenReply] = useState(false);
+  const [commentLoading, setLoading] = useState(false);
+
+  const handleChange = (e) => {
+    setCommentValue(e.currentTarget.value);
+  };
+
+  const openReply = () => {
+    stateSetter(false);
+    setOpenReply(!OpenReply);
+  };
+
+  const nevermind = () => {
+    setLoading(true)
+    setOpenReply(!OpenReply);
+    setLoading(false);
+    stateSetter(true);
+  };
+
+  // console.log({USER_ID: user})
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
     const username = emailTrim(user.email);
-    const [CommentValue, setCommentValue] = useState("")
-    const [OpenReply, setOpenReply] = useState(false)
 
-    const handleChange = (e) => {
-        setCommentValue(e.currentTarget.value)
-    }
+    const variables = {
+      writer: username,
+      postId: props.postId,
+      responseTo: props.comment._id,
+      content: CommentValue,
+    };
 
-    const openReply = () => {
-        setOpenReply(!OpenReply)
-    }
+    axios
+      .post(`${beURL}/api/comments/saveComment`, variables)
+      .then((response) => {
+        if (response.data.status) {
+          setCommentValue("");
+          setLoading(false);
+          setOpenReply(!OpenReply);
+          stateSetter(true);
+          refreshFunction();
 
-    // console.log({USER_ID: user})
-
-    const onSubmit = (e) => {
-        e.preventDefault();
-        const username = emailTrim(user.email)
-
-        const variables = {
-            writer: username,
-            postId: props.postId,
-            responseTo: props.comment._id,
-            content: CommentValue
+          // props.refreshFunction(response.data.result)
+        } else {
+          setLoading(false);
+          alert("Failed to save comment");
         }
+      });
+  };
 
+  const actions =
+    props.comment.writer === emailTrim(user.email)
+      ? null
+      : [
+          <LikeDislikes
+            comment
+            commentId={props.comment._id}
+            userId={username}
+          />,
+          <span onClick={openReply} key="comment-basic-reply-to">
+            Reply
+          </span>,
+        ];
+  console.log({ PROPS: props });
+  return (
+    <div>
+      <Comment
+        actions={actions}
+        author={props.comment.writer}
+        avatar={<Avatar src={logo} alt="image" />}
+        content={<p>{props.comment.content}</p>}
+      ></Comment>
 
-        axios.post(`${beURL}/api/comments/saveComment`, variables)
-            .then(response => {
-                if (response.data.status) {
-                    setCommentValue("")
-                    setOpenReply(!OpenReply)
-                    // props.refreshFunction(response.data.result)
-                } else {
-                    alert('Failed to save comment')
+      {
+        OpenReply && !openComment && (
+          <>
+            <Form.Item>
+              <TextArea
+                rows={4}
+                onChange={handleChange}
+                value={CommentValue}
+                placeholder="Leave a comment about the movie."
+              />
+            </Form.Item>
+            <Form.Item>
+              <Button
+                htmlType="submit"
+                icon={
+                  <CheckSquareTwoTone twoToneColor="#5cb85c" size="large" />
                 }
-            })
-    }
-
-    const actions = [
-        <LikeDislikes comment commentId={props.comment._id} userId={username} />,
-        <span onClick={openReply} key="comment-basic-reply-to">Reply</span>
-    ]
-    console.log({PROPS: props})
-    return (
-        <div>
-            <Comment
-                actions={actions}
-                author={props.comment.writer.name}
-                avatar={
-                    <Avatar
-                        src={props.comment.writer.image}
-                        alt="image"
-                    />
+                onClick={onSubmit}
+                loading={commentLoading}
+              >
+                Submit
+              </Button>
+              <Button
+                htmlType="default"
+                icon={
+                  <CloseSquareTwoTone twoToneColor="#FF0000" size="large" />
                 }
-                content={
-                    <p>
-                        {props.comment.content}
-                    </p>
-                }
-            ></Comment>
-
-
-            {OpenReply &&
-                <form style={{ display: 'flex' }} onSubmit={onSubmit}>
-                    <TextArea
-                        style={{ width: '100%', borderRadius: '5px' }}
-                        onChange={handleChange}
-                        value={CommentValue}
-                        placeholder="write some comments"
-                    />
-                    <br />
-                    <Button style={{ width: '20%', height: '52px' }} onClick={onSubmit}>Submit</Button>
-                </form>
-            }
-
-        </div>
-    )
+                onClick={nevermind}
+                loading={commentLoading}
+              >
+                Close
+              </Button>
+            </Form.Item>
+          </>
+        )
+      }
+    </div>
+  );
 }
 
-export default SingleComment
+export default SingleComment;
