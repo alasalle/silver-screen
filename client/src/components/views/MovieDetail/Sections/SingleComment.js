@@ -28,12 +28,11 @@ function SingleComment(props) {
   };
 
   const nevermind = () => {
-    setLoading(true)
+    setLoading(true);
     setOpenReply(!OpenReply);
     setLoading(false);
     stateSetter(true);
   };
-
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -87,42 +86,36 @@ function SingleComment(props) {
         content={<p>{props.comment.content}</p>}
       ></Comment>
 
-      {
-        OpenReply && !openComment && (
-          <>
-            <Form.Item>
-              <TextArea
-                rows={4}
-                onChange={handleChange}
-                value={CommentValue}
-                placeholder={`Reply to ${props.comment.writer}.`}
-              />
-            </Form.Item>
-            <Form.Item>
-              <Button
-                htmlType="submit"
-                icon={
-                  <CheckSquareTwoTone twoToneColor="#5cb85c" size="large" />
-                }
-                onClick={onSubmit}
-                loading={commentLoading}
-              >
-                Submit
-              </Button>
-              <Button
-                htmlType="default"
-                icon={
-                  <CloseSquareTwoTone twoToneColor="#FF0000" size="large" />
-                }
-                onClick={nevermind}
-                loading={commentLoading}
-              >
-                Close
-              </Button>
-            </Form.Item>
-          </>
-        )
-      }
+      {OpenReply && !openComment && (
+        <>
+          <Form.Item>
+            <TextArea
+              rows={4}
+              onChange={handleChange}
+              value={CommentValue}
+              placeholder={`Reply to ${props.comment.writer}.`}
+            />
+          </Form.Item>
+          <Form.Item>
+            <Button
+              htmlType="submit"
+              icon={<CheckSquareTwoTone twoToneColor="#5cb85c" size="large" />}
+              onClick={onSubmit}
+              loading={commentLoading}
+            >
+              Submit
+            </Button>
+            <Button
+              htmlType="default"
+              icon={<CloseSquareTwoTone twoToneColor="#FF0000" size="large" />}
+              onClick={nevermind}
+              loading={commentLoading}
+            >
+              Close
+            </Button>
+          </Form.Item>
+        </>
+      )}
     </div>
   );
 }

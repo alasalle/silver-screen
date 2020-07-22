@@ -22,12 +22,12 @@ function FavoritePage() {
     if (!isLoading && isAuthenticated) {
       fetchFavoredMovie();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading]);
 
   const fetchFavoredMovie = () => {
-    let username = emailTrim(user.email)
-    setLoading(true)
+    let username = emailTrim(user.email);
+    setLoading(true);
     axios
       .post(`${beURL}/api/favorites/fetchFavorites`, { userFrom: username })
       .then((response) => {
@@ -39,7 +39,7 @@ function FavoritePage() {
           setLoading(false);
         }
       })
-      .catch(err => console.log({BIG_OLE_ERR: err}))
+      .catch((err) => console.log({ BIG_OLE_ERR: err }));
   };
 
   const onClickDelete = (movieId) => {

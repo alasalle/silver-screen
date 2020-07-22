@@ -30,7 +30,11 @@ function NavBar() {
       <Button
         className="menu__mobile-button"
         type="primary"
-        style={{margin: "22px auto", backgroundColor: "#344655", borderColor: "slategray"}}
+        style={{
+          margin: "22px auto",
+          backgroundColor: "#344655",
+          borderColor: "slategray",
+        }}
         onClick={showDrawer}
       >
         <MenuFoldOutlined type="align-right" />

@@ -5,5 +5,5 @@ module.exports = {
   imageURL: process.env.REACT_APP_IMAGE_URL,
   backdropSize: process.env.REACT_APP_BACKDROP_SIZE,
   imageSize: process.env.REACT_APP_IMG_SIZE,
-  posterSize: process.env.REACT_APP_POSTER_SIZE
-}
+  posterSize: process.env.REACT_APP_POSTER_SIZE,
+};

@@ -5,7 +5,15 @@ import { imageURL } from "../../config/key";
 const { Meta } = Card;
 
 function GridCards(props) {
-  let { actor, keyProp, image, movieId, movieName, characterName, name } = props;
+  let {
+    actor,
+    keyProp,
+    image,
+    movieId,
+    movieName,
+    characterName,
+    name,
+  } = props;
   const POSTER_SIZE = "w154";
 
   if (actor) {
@@ -14,7 +22,7 @@ function GridCards(props) {
         <div style={{ position: "relative" }}>
           <Card
             hoverable
-            style={{ width: "100%"}}
+            style={{ width: "100%" }}
             cover={
               <img
                 style={{ width: "100%" }}
@@ -23,10 +31,7 @@ function GridCards(props) {
               />
             }
           >
-            <Meta
-              title={name}
-              description={`Character: ${characterName}`}
-            />
+            <Meta title={name} description={`Character: ${characterName}`} />
           </Card>
         </div>
       </Col>

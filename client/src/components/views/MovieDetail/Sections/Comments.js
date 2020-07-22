@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Input, Typography, Form, } from "antd";
+import { Button, Input, Typography, Form } from "antd";
 import { CheckSquareTwoTone } from "@ant-design/icons";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";

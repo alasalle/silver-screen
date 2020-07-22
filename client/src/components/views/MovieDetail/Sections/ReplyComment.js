@@ -42,8 +42,6 @@ function ReplyComment(props) {
 
   return (
     <div>
-      
-
       {OpenReplyComments && renderReplyComment(props.parentCommentId)}
       {ChildCommentNumber > 0 && !OpenReplyComments && (
         <p

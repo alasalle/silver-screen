@@ -35,7 +35,7 @@ router.post("/fetchFavorites", (req, res) => {
   Favorite.find({
     userFrom: req.body.userFrom,
   }).exec((err, favorites) => {
-    if (err) return res.status(400).json({status: false, err});
+    if (err) return res.status(400).json({ status: false, err });
 
     res.status(200).json({ status: true, faves: favorites });
   });
@@ -52,14 +52,14 @@ router.post("/addToFavorites", (req, res) => {
 });
 
 router.post("/removeFromFavorite", (req, res) => {
-    
-  
-    Favorite.deleteOne({movieId: req.body.movieId, userFrom: req.body.userFrom}, (err) => {
+  Favorite.deleteOne(
+    { movieId: req.body.movieId, userFrom: req.body.userFrom },
+    (err) => {
       if (err) return res.json({ status: false, err });
-  
-      return res.status(200).json({ status: true});
-    });
-  });
-  
+
+      return res.status(200).json({ status: true });
+    }
+  );
+});
 
 module.exports = router;

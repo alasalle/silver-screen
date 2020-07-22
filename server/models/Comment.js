@@ -12,7 +12,7 @@ const commentSchema = mongoose.Schema(
     },
     responseTo: {
       type: String,
-      ref: "Comment"
+      ref: "Comment",
     },
     content: {
       type: String,
