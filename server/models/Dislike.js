@@ -1,30 +1,35 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const dislikeSchema = mongoose.Schema({
+const dislikeSchema = mongoose.Schema(
+  {
     userId: {
-        type: String
+      type: String,
     },
     commentId: {
-        type: Schema.Types.ObjectId,
-        ref: 'Comment'
+      type: Schema.Types.ObjectId,
+      ref: "Comment",
     },
     videoId: {
-        type: String,
-    }
+      type: String,
+    },
+  },
+  { timestamps: true }
+);
 
-}, { timestamps: true })
-
-Dislike.virtual('disliker', {
-    ref: 'User', // The model to use
-    localField: 'userId', // Find people where `localField`
-    foreignField: 'auth_id', // is equal to `foreignField`
+dislikeSchema.virtual(
+  "disliker",
+  {
+    ref: "User", // The model to use
+    localField: "userId", // Find people where `localField`
+    foreignField: "auth_id", // is equal to `foreignField`
     // If `justOne` is true, 'members' will be a single doc as opposed to
     // an array. `justOne` is false by default.
     justOne: true, // Query options, see http://bit.ly/mongoose-query-options
-  }, { toJSON: { virtuals: true } });
+  },
+  { toJSON: { virtuals: true } }
+);
 
+const Dislike = mongoose.model("Dislike", dislikeSchema);
 
-const Dislike = mongoose.model('Dislike', dislikeSchema);
-
-module.exports = { Dislike }
+module.exports = { Dislike };

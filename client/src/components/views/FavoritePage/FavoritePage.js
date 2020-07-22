@@ -26,10 +26,10 @@ function FavoritePage() {
   const fetchFavoredMovie = () => {
     const endpoint = `${beURL}/api/favorites/fetchFavorites`;
 
-    console.log(endpoint);
     axios
       .post(`${beURL}/api/favorites/fetchFavorites`, { userFrom: user.sub })
       .then((response) => {
+        console.log({RESPONSE: response.data})
         if (response.data.status) {
           setFavorites(response.data.faves);
           setLoading(false);
