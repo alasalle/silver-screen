@@ -48,7 +48,7 @@ function SingleComment(props) {
         <LikeDislikes comment commentId={props.comment._id} userId={user.sub} />,
         <span onClick={openReply} key="comment-basic-reply-to">Reply</span>
     ]
-    // console.log({PROPS: props})
+    console.log({PROPS: props})
     return (
         <div>
             <Comment

@@ -23,7 +23,7 @@ function RightMenu(props) {
     return (
       <Menu mode={props.mode}>
         <Menu.Item key="loading">
-          <div className="auth-helper-text">Loading...</div>
+          <div className="auth-helper-text" style={{padding: "0px 5px"}}>Loading...</div>
         </Menu.Item>
       </Menu>
     );
@@ -32,7 +32,7 @@ function RightMenu(props) {
   if (isAuthenticated) {
     return (
       <Menu mode={props.mode}>
-        <Menu.Item key="logout">
+        <Menu.Item key="logout" style={{padding: "0px 5px"}}>
           <LogoutButton />
         </Menu.Item>
       </Menu>
@@ -42,7 +42,7 @@ function RightMenu(props) {
     return (
 
       <Menu mode={props.mode}>
-        <Menu.Item key="login">
+        <Menu.Item key="login" style={{padding: "0px 5px"}}>
           <LoginButton />
         </Menu.Item>
       </Menu>

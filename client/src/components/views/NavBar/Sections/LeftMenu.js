@@ -6,7 +6,16 @@ const MenuItemGroup = Menu.ItemGroup;
 
 function LeftMenu(props) {
   return (
-    <Menu mode={props.mode}>
+    <Menu
+      mode={props.mode}
+      className="leftMenu"
+      // style={{
+      //   margin: "0",
+      //   position: "absolute",
+      //   top: "50%",
+      //   transform: "translateY(-50%)",
+      // }}
+    >
       <Menu.Item key="home">
         <a href="/">Home</a>
       </Menu.Item>

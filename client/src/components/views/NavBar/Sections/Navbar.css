@@ -1,4 +1,4 @@
-@import '~antd/dist/antd.css';
+@import "~antd/dist/antd.css";
 
 .menu {
   padding: 0 20px;
@@ -24,6 +24,11 @@
 }
 
 .menu__container .ant-menu-item {
+  padding: 10px 5px;
+  height: 66px;
+}
+
+.authButton {
   padding: 0px 5px;
 }
 
@@ -34,15 +39,14 @@
 .menu__container .ant-menu-item a,
 .menu__container .ant-menu-submenu-title a,
 .menu__container .ant-menu-item button,
-.menu__container .ant-menu-item .auth-helper-text
- {
+.menu__container .ant-menu-item .auth-helper-text {
   padding: 10px 15px;
 }
 
 .menu__container .ant-menu-item button,
 ul.ant-menu li button {
   border: 0;
-  background-color: transparent
+  background-color: transparent;
 }
 
 .menu__container .ant-menu-horizontal {
@@ -75,6 +79,15 @@ ul.ant-menu li button {
   padding: 14px 24px !important;
 }
 
+@media (min-width: 768px) {
+  html body.ant-scrolling-effect div div.ant-drawer.ant-drawer-right.ant-drawer-open.menu_drawer div.ant-drawer-content-wrapper div.ant-drawer-content div.ant-drawer-wrapper-body div.ant-drawer-body ul.ant-menu.ant-menu-light.ant-menu-root.ant-menu-inline {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
 @media (max-width: 767px) {
   .menu__mobile-button {
     display: inline-block !important;
@@ -95,7 +108,7 @@ ul.ant-menu li button {
   }
 
   ul.ant-menu li button {
-    padding: 0px
+    padding: 0px;
   }
 
   .menu__logo a {
