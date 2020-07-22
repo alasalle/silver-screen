@@ -1,10 +1,13 @@
 import React, { useEffect, useState, Suspense } from "react";
-import { Typography, Popover, Button } from "antd";
+import { Typography, Popover, Button, Row } from "antd";
 import LoadingOverlay from "react-loading-overlay";
 import axios from "axios";
-import "./favorite.css";
 import { useAuth0 } from "@auth0/auth0-react";
+
 import { beURL, imageURL, posterSize } from "../../../config/key";
+import FavoriteCard from "../../commons/FavoriteCard";
+
+import "./favorite.css";
 
 const { Title } = Typography;
 
@@ -16,16 +19,16 @@ function FavoritePage() {
 
   useEffect(() => {
     if (!isLoading && isAuthenticated) {
-        fetchFavoredMovie()
+      fetchFavoredMovie();
     }
   }, [isLoading]);
 
   const fetchFavoredMovie = () => {
-      const endpoint = `${beURL}/api/favorites/fetchFavorites`
+    const endpoint = `${beURL}/api/favorites/fetchFavorites`;
 
-      console.log(endpoint)
+    console.log(endpoint);
     axios
-      .post(`${beURL}/api/favorites/fetchFavorites`, {userFrom: user.sub})
+      .post(`${beURL}/api/favorites/fetchFavorites`, { userFrom: user.sub })
       .then((response) => {
         if (response.data.status) {
           setFavorites(response.data.faves);
@@ -43,9 +46,9 @@ function FavoritePage() {
     };
 
     axios
-      .post("/api/favorites/removeFromFavorite", variables)
+      .post(`${beURL}/api/favorites/removeFromFavorite`, variables)
       .then((response) => {
-        if (response.data.success) {
+        if (response.data.status) {
           fetchFavoredMovie();
         } else {
           alert("Failed to Remove From Favorite");
@@ -87,26 +90,32 @@ function FavoritePage() {
     return <LoadingOverlay active={true} spinner text="Loading..." />;
 
   return (
-    <Suspense
-      fallback={<LoadingOverlay active={true} spinner text="Loading..." />}
-    >
-      <div style={{ width: "85%", margin: "3rem auto" }}>
-        <Title level={2}> Favorite Movies </Title>
-        <hr />
-        {!Loading && (
-          <table>
-            <thead>
-              <tr>
-                <th>Movie Title</th>
-                <th>Movie RunTime</th>
-                <td>Remove from favorites</td>
-              </tr>
-            </thead>
-            <tbody>{renderCards}</tbody>
-          </table>
-        )}
+      
+      <div style={{ width: "100%", margin: "0" }}>
+        <div style={{ width: "85%", margin: "1rem auto" }}>
+          <Title level={2}> Favorites </Title>
+          <hr />
+          <Row gutter={[16, 16]}>
+            {Favorites &&
+              Favorites.map((movie, index) => (
+                <React.Fragment key={index}>
+                  <FavoriteCard
+                    image={
+                      movie.moviePost
+                        ? `${imageURL}${posterSize}${movie.moviePost}`
+                        : null
+                    }
+                    movieId={movie.movieId}
+                    movieName={movie.movieTitle}
+                    duration={movie.movieRunTime}
+                    deleteFunc={onClickDelete}
+                    user={user}
+                  />
+                </React.Fragment>
+              ))}
+          </Row>
+        </div>
       </div>
-    </Suspense>
   );
 }
 
