@@ -97,7 +97,7 @@ function SingleComment(props) {
                 rows={4}
                 onChange={handleChange}
                 value={CommentValue}
-                placeholder="Leave a comment about the movie."
+                placeholder={`Reply to ${props.comment.writer}.`}
               />
             </Form.Item>
             <Form.Item>
