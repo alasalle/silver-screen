@@ -14,7 +14,6 @@ const { Title } = Typography;
 
 function FavoritePage() {
   const { user, isAuthenticated, isLoading, error } = useAuth0();
-  const username = emailTrim(user.email);
 
   const [Favorites, setFavorites] = useState([]);
   const [Loading, setLoading] = useState(true);
@@ -26,23 +25,25 @@ function FavoritePage() {
   }, [isLoading]);
 
   const fetchFavoredMovie = () => {
+    let username = emailTrim(user.email)
     axios
       .post(`${beURL}/api/favorites/fetchFavorites`, { userFrom: username })
       .then((response) => {
-        console.log({ RESPONSE: response.data });
+        console.log({ RESPONSE: response });
         if (response.data.status) {
           setFavorites(response.data.faves);
           setLoading(false);
         } else {
           alert("Failed to get subscription videos");
         }
-      });
+      })
+      .catch(err => console.log({BIG_OLE_ERR: err}))
   };
 
   const onClickDelete = (movieId) => {
     const variables = {
       movieId: movieId,
-      userFrom: username,
+      userFrom: emailTrim(user.email),
     };
 
     axios

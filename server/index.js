@@ -30,7 +30,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 
-app.use('/api/users', require('./routes/users'));
 app.use('/api/comments', require('./routes/comments'));
 app.use('/api/likes', require('./routes/likes'));
 app.use('/api/favorites', require('./routes/favorites'));

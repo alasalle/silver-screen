@@ -15,7 +15,7 @@ router.post("/getLikes", (req, res) => {
     variable = { commentId: req.body.commentId };
   }
 
-  Like.find(variable).populate('liker').exec((err, likes) => {
+  Like.find(variable).exec((err, likes) => {
     if (err) return res.status(400).send(err);
     res.status(200).json({ status: true, likes });
   });
@@ -29,7 +29,7 @@ router.post("/getDislikes", (req, res) => {
     variable = { commentId: req.body.commentId };
   }
 
-  Dislike.find(variable).populate('disliker').exec((err, dislikes) => {
+  Dislike.find(variable).exec((err, dislikes) => {
     if (err) return res.status(400).send(err);
     res.status(200).json({ status: true, dislikes });
   });

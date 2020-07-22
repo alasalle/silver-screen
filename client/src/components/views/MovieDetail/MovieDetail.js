@@ -16,7 +16,6 @@ function MovieDetailPage(props) {
 
     const movieId = props.match.params.movieId
     const { user, isAuthenticated, isLoading, error} = useAuth0();
-    const username = emailTrim(user.email);
     const [Movie, setMovie] = useState([])
     const [Casts, setCasts] = useState([])
     const [CommentLists, setCommentLists] = useState([])
@@ -109,7 +108,7 @@ function MovieDetailPage(props) {
             <div style={{ width: '85%', margin: '1rem auto' }}>
 
                 <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                    <Favorite movieInfo={Movie} movieId={movieId} userFrom={username} />
+                    <Favorite movieInfo={Movie} movieId={movieId} userFrom={emailTrim(user.email)} />
                 </div>
 
 
@@ -141,7 +140,7 @@ function MovieDetailPage(props) {
                 <br />
 
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
-                    <LikeDislikes video videoId={movieId} userId={username} />
+                    <LikeDislikes video videoId={movieId} userId={emailTrim(user.email)} />
                 </div>
 
                 {/* Comments */}

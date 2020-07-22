@@ -34,7 +34,7 @@ router.post("/favorited", (req, res) => {
 router.post("/fetchFavorites", (req, res) => {
   Favorite.find({
     userFrom: req.body.userFrom,
-  }).populate('movieId').exec((err, favorites) => {
+  }).exec((err, favorites) => {
     if (err) return res.status(400).json({status: false, err});
 
     res.status(200).json({ status: true, faves: favorites });
