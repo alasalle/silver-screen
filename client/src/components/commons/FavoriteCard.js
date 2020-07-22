@@ -7,7 +7,7 @@ import { time_convert } from "../../functions/timeconvert";
 const { Meta } = Card;
 
 function FavoriteCard(props) {
-  let { key, image, movieId, movieName, duration, deleteFunc, user } = props;
+  let { key, image, movieId, movieName, duration, deleteFunc } = props;
 
   console.log({PROPS: props})
 
@@ -27,7 +27,7 @@ function FavoriteCard(props) {
           <Button
           type="default"
           icon={<CloseOutlined />}
-          onClick={() => deleteFunc(movieId, user.sub)}
+          onClick={() => deleteFunc(movieId)}
           style={{display: "block", margin: "26px auto"}}
         >Remove Favorite</Button>
         </Card>

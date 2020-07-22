@@ -7,6 +7,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import Comments from './Sections/Comments'
 import LikeDislikes from './Sections/LikeDislikes';
 import { apiURL, apiKey, imageURL, imageSize, beURL } from '../../../config/key';
+import { emailTrim } from "../../../functions/emailtrim";
 import GridCards from '../../commons/GridCard';
 import MainImage from '../../views/LandingPage/Sections/MainImage';
 import MovieInfo from './Sections/MovieInfo';
@@ -15,6 +16,7 @@ function MovieDetailPage(props) {
 
     const movieId = props.match.params.movieId
     const { user, isAuthenticated, isLoading, error} = useAuth0();
+    const username = emailTrim(user.email);
     const [Movie, setMovie] = useState([])
     const [Casts, setCasts] = useState([])
     const [CommentLists, setCommentLists] = useState([])
@@ -107,7 +109,7 @@ function MovieDetailPage(props) {
             <div style={{ width: '85%', margin: '1rem auto' }}>
 
                 <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                    <Favorite movieInfo={Movie} movieId={movieId} userFrom={user.sub} />
+                    <Favorite movieInfo={Movie} movieId={movieId} userFrom={username} />
                 </div>
 
 
@@ -139,7 +141,7 @@ function MovieDetailPage(props) {
                 <br />
 
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
-                    <LikeDislikes video videoId={movieId} userId={user.sub} />
+                    <LikeDislikes video videoId={movieId} userId={username} />
                 </div>
 
                 {/* Comments */}

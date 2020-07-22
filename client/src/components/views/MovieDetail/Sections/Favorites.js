@@ -4,6 +4,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { Button } from 'antd';
 
 import { beURL } from '../../../../config/key';
+import { emailTrim } from "../../../../functions/emailtrim";
 
 function Favorite(props) {
     const {user, isAuthenticated, error, isLoading } = useAuth0();
@@ -16,6 +17,7 @@ function Favorite(props) {
 
     const [FavoriteNumber, setFavoriteNumber] = useState(0)
     const [Favorited, setFavorited] = useState(false)
+
     const variables = {
         movieId: movieId,
         userFrom: userFrom,

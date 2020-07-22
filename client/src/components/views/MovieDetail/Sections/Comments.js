@@ -5,6 +5,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import SingleComment from './SingleComment';
 import ReplyComment from './ReplyComment';
 import { beURL } from '../../../../config/key';
+import { emailTrim } from "../../../../functions/emailtrim";
 
 const { TextArea } = Input;
 const { Title } = Typography;
@@ -24,9 +25,11 @@ function Comments(props) {
             return alert('Please Log in first');
         }
 
+        const username = emailTrim(user.email);
+
         const variables = {
             content: Comment,
-            writer: user.sub,
+            writer: username,
             postId: props.postId
         }
         // console.log(variables)

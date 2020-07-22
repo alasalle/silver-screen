@@ -4,10 +4,12 @@ import axios from 'axios';
 import { useAuth0 } from "@auth0/auth0-react";
 import LikeDislikes from './LikeDislikes';
 import { beURL } from "../../../../config/key";
+import { emailTrim } from "../../../../functions/emailtrim";
 const { TextArea } = Input;
 
 function SingleComment(props) {
     const { user, isAuthenticated, error, isLoading } = useAuth0();
+    const username = emailTrim(user.email);
     const [CommentValue, setCommentValue] = useState("")
     const [OpenReply, setOpenReply] = useState(false)
 
@@ -23,9 +25,10 @@ function SingleComment(props) {
 
     const onSubmit = (e) => {
         e.preventDefault();
+        const username = emailTrim(user.email)
 
         const variables = {
-            writer: user.sub,
+            writer: username,
             postId: props.postId,
             responseTo: props.comment._id,
             content: CommentValue
@@ -45,7 +48,7 @@ function SingleComment(props) {
     }
 
     const actions = [
-        <LikeDislikes comment commentId={props.comment._id} userId={user.sub} />,
+        <LikeDislikes comment commentId={props.comment._id} userId={username} />,
         <span onClick={openReply} key="comment-basic-reply-to">Reply</span>
     ]
     console.log({PROPS: props})

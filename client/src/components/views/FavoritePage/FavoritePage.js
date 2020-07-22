@@ -6,6 +6,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 import { beURL, imageURL, posterSize } from "../../../config/key";
 import FavoriteCard from "../../commons/FavoriteCard";
+import { emailTrim } from "../../../functions/emailtrim";
 
 import "./favorite.css";
 
@@ -13,6 +14,7 @@ const { Title } = Typography;
 
 function FavoritePage() {
   const { user, isAuthenticated, isLoading, error } = useAuth0();
+  const username = emailTrim(user.email);
 
   const [Favorites, setFavorites] = useState([]);
   const [Loading, setLoading] = useState(true);
@@ -25,7 +27,7 @@ function FavoritePage() {
 
   const fetchFavoredMovie = () => {
     axios
-      .post(`${beURL}/api/favorites/fetchFavorites`, { userFrom: user.sub })
+      .post(`${beURL}/api/favorites/fetchFavorites`, { userFrom: username })
       .then((response) => {
         console.log({ RESPONSE: response.data });
         if (response.data.status) {
@@ -37,10 +39,10 @@ function FavoritePage() {
       });
   };
 
-  const onClickDelete = (movieId, userFrom) => {
+  const onClickDelete = (movieId) => {
     const variables = {
       movieId: movieId,
-      userFrom: userFrom,
+      userFrom: username,
     };
 
     axios
@@ -53,36 +55,6 @@ function FavoritePage() {
         }
       });
   };
-
-  const renderCards = Favorites.map((favorite, index) => {
-    const content = (
-      <div>
-        {favorite.moviePost ? (
-          <img src={`${imageURL}${posterSize}${favorite.moviePost}`} />
-        ) : (
-          "no image"
-        )}
-      </div>
-    );
-
-    return (
-      <tr key={index}>
-        <Popover content={content} title={`${favorite.movieTitle}`}>
-          <td>{favorite.movieTitle}</td>
-        </Popover>
-
-        <td>{favorite.movieRunTime} mins</td>
-        <td>
-          <button
-            onClick={() => onClickDelete(favorite.movieId, favorite.userFrom)}
-          >
-            {" "}
-            Remove{" "}
-          </button>
-        </td>
-      </tr>
-    );
-  });
 
   if (isLoading)
     return <LoadingOverlay active={true} spinner text="Loading..." />;
@@ -106,7 +78,6 @@ function FavoritePage() {
                   movieName={movie.movieTitle}
                   duration={movie.movieRunTime}
                   deleteFunc={onClickDelete}
-                  user={user}
                 />
               </React.Fragment>
             ))}

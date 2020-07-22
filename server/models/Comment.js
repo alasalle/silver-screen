@@ -12,6 +12,7 @@ const commentSchema = mongoose.Schema(
     },
     responseTo: {
       type: String,
+      ref: "Comment"
     },
     content: {
       type: String,
@@ -25,19 +26,6 @@ commentSchema.virtual(
   {
     ref: "User", // The model to use
     localField: "writer", // Find people where `localField`
-    foreignField: "username", // is equal to `foreignField`
-    // If `justOne` is true, 'members' will be a single doc as opposed to
-    // an array. `justOne` is false by default.
-    justOne: true, // Query options, see http://bit.ly/mongoose-query-options
-  },
-  { toJSON: { virtuals: true } }
-);
-
-commentSchema.virtual(
-  "respondedTo",
-  {
-    ref: "User", // The model to use
-    localField: "responseTo", // Find people where `localField`
     foreignField: "username", // is equal to `foreignField`
     // If `justOne` is true, 'members' will be a single doc as opposed to
     // an array. `justOne` is false by default.

@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useAuth0 } from '@auth0/auth0-react';
 
 import { beURL } from '../../../../config/key';
+import { emailTrim } from "../../../../functions/emailtrim";
 
 function LikeDislikes(props) {
     const { user, isAuthenticated, error, isLoading } = useAuth0();
@@ -14,11 +15,12 @@ function LikeDislikes(props) {
     const [LikeAction, setLikeAction] = useState(null)
     const [DislikeAction, setDislikeAction] = useState(null)
     let variable = {};
+    let username = emailTrim(user.email)
 
     if (props.video) {
-        variable = { videoId: props.videoId, userId: user.sub}
+        variable = { videoId: props.videoId, userId: username}
     } else {
-        variable = { commentId: props.commentId, userId: user.sub }
+        variable = { commentId: props.commentId, userId: username }
     }
 
     
@@ -36,7 +38,7 @@ function LikeDislikes(props) {
 
                     //if I already click this like button or not 
                     response.data.likes.map(like => {
-                        if (like.userId === user.sub) {
+                        if (like.userId === username) {
                             setLikeAction('liked')
                         }
                     })
@@ -54,7 +56,7 @@ function LikeDislikes(props) {
 
                     //if I already click this like button or not 
                     response.data.dislikes.map(dislike => {
-                        if (dislike.userId === user.sub) {
+                        if (dislike.userId === username) {
                             setDislikeAction('disliked')
                         }
                     })
