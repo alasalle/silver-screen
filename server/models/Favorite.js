@@ -28,7 +28,7 @@ favoriteSchema.virtual(
   {
     ref: "User", // The model to use
     localField: "userFrom", // Find people where `localField`
-    foreignField: "auth_id", // is equal to `foreignField`
+    foreignField: "username", // is equal to `foreignField`
     // If `justOne` is true, 'members' will be a single doc as opposed to
     // an array. `justOne` is false by default.
     justOne: true, // Query options, see http://bit.ly/mongoose-query-options
