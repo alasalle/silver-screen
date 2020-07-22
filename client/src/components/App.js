@@ -22,7 +22,7 @@ function App() {
           <Route exact path="/favorites" component={FavoritePage} />
         </Switch>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </Suspense>
   );
 }
