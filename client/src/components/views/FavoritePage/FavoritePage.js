@@ -24,12 +24,10 @@ function FavoritePage() {
   }, [isLoading]);
 
   const fetchFavoredMovie = () => {
-    const endpoint = `${beURL}/api/favorites/fetchFavorites`;
-
     axios
       .post(`${beURL}/api/favorites/fetchFavorites`, { userFrom: user.sub })
       .then((response) => {
-        console.log({RESPONSE: response.data})
+        console.log({ RESPONSE: response.data });
         if (response.data.status) {
           setFavorites(response.data.faves);
           setLoading(false);
@@ -90,32 +88,31 @@ function FavoritePage() {
     return <LoadingOverlay active={true} spinner text="Loading..." />;
 
   return (
-      
-      <div style={{ width: "100%", margin: "0" }}>
-        <div style={{ width: "85%", margin: "1rem auto" }}>
-          <Title level={2}> Favorites </Title>
-          <hr />
-          <Row gutter={[16, 16]}>
-            {Favorites &&
-              Favorites.map((movie, index) => (
-                <React.Fragment key={index}>
-                  <FavoriteCard
-                    image={
-                      movie.moviePost
-                        ? `${imageURL}${posterSize}${movie.moviePost}`
-                        : null
-                    }
-                    movieId={movie.movieId}
-                    movieName={movie.movieTitle}
-                    duration={movie.movieRunTime}
-                    deleteFunc={onClickDelete}
-                    user={user}
-                  />
-                </React.Fragment>
-              ))}
-          </Row>
-        </div>
+    <div style={{ width: "100%", margin: "0" }}>
+      <div style={{ width: "85%", margin: "1rem auto" }}>
+        <Title level={2}> Favorites </Title>
+        <hr />
+        <Row gutter={[16, 16]}>
+          {Favorites &&
+            Favorites.map((movie, index) => (
+              <React.Fragment key={index}>
+                <FavoriteCard
+                  image={
+                    movie.moviePost
+                      ? `${imageURL}${posterSize}${movie.moviePost}`
+                      : null
+                  }
+                  movieId={movie.movieId}
+                  movieName={movie.movieTitle}
+                  duration={movie.movieRunTime}
+                  deleteFunc={onClickDelete}
+                  user={user}
+                />
+              </React.Fragment>
+            ))}
+        </Row>
       </div>
+    </div>
   );
 }
 
