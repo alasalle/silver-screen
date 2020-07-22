@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { List, Avatar, Row, Col, Button } from "antd";
+import { Row, Button } from "antd";
 import axios from "axios";
 import LoadingOverlay from "react-loading-overlay";
 import { useAuth0 } from "@auth0/auth0-react";
 
 import Comments from "./Sections/Comments";
-import LikeDislikes from "./Sections/LikeDislikes";
 import {
   apiURL,
   apiKey,
@@ -20,7 +19,7 @@ import MovieInfo from "./Sections/MovieInfo";
 import Favorite from "./Sections/Favorites";
 function MovieDetailPage(props) {
   const movieId = props.match.params.movieId;
-  const { user, isAuthenticated, isLoading, error } = useAuth0();
+  const { user, isLoading } = useAuth0();
   const [Movie, setMovie] = useState([]);
   const [Casts, setCasts] = useState([]);
   const [CommentLists, setCommentLists] = useState([]);
@@ -39,11 +38,12 @@ function MovieDetailPage(props) {
       .post(`${beURL}/api/comments/getComments`, movieVariable)
       .then((response) => {
         if (response.data.status) {
-          setCommentLists(response.data.comments);
+          return setCommentLists(response.data.comments);
         } else {
           alert("Failed to get comments Info");
         }
       });
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const toggleActorView = () => {

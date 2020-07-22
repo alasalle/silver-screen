@@ -8,7 +8,7 @@ import { beURL } from '../../../../config/key';
 import { emailTrim } from "../../../../functions/emailtrim";
 
 function LikeDislikes(props) {
-    const { user, isAuthenticated, error, isLoading } = useAuth0();
+    const { user, isAuthenticated } = useAuth0();
 
     const [Likes, setLikes] = useState(0)
     const [Dislikes, setDislikes] = useState(0)
@@ -36,13 +36,16 @@ function LikeDislikes(props) {
                     setLikes(response.data.likes.length)
 
                     //if I already click this like button or not 
+                    // eslint-disable-next-line
                     response.data.likes.map(like => {
                         if (like.userId === username) {
                             setLikeAction('liked')
+                            
                         }
                     })
                 } else {
                     alert('Failed to get likes')
+                    
                 }
             })
 
@@ -53,6 +56,7 @@ function LikeDislikes(props) {
                     setDislikes(response.data.dislikes.length)
 
                     //if I already click this like button or not 
+                    // eslint-disable-next-line
                     response.data.dislikes.map(dislike => {
                         if (dislike.userId === username) {
                             setDislikeAction('disliked')
@@ -62,7 +66,7 @@ function LikeDislikes(props) {
                     alert('Failed to get dislikes')
                 }
             })
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
 

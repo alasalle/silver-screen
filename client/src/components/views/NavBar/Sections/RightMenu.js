@@ -6,7 +6,7 @@ import LoginButton from "../../../../Auth0/LoginButton";
 import LogoutButton from "../../../../Auth0/LogoutButton";
 
 function RightMenu(props) {
-  const { user, isAuthenticated, isLoading, error } = useAuth0();
+  const { isAuthenticated, isLoading, error } = useAuth0();
 
   if (error) {
     console.error(error)

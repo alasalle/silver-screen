@@ -1,6 +1,5 @@
 import React from "react";
-import { Card, Avatar, Col, Typography, Row, Button } from "antd";
-import { imageURL } from "../../config/key";
+import { Card, Col, Button } from "antd";
 import {CloseOutlined} from "@ant-design/icons";
 import { time_convert } from "../../functions/timeconvert";
 

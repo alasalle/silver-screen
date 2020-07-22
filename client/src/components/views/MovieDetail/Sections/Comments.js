@@ -1,20 +1,18 @@
 import React, { useState } from "react";
-import { Button, Input, Typography, Divider, Form, Avatar } from "antd";
-import { CloseSquareTwoTone, CheckSquareTwoTone } from "@ant-design/icons";
+import { Button, Input, Typography, Form, } from "antd";
+import { CheckSquareTwoTone } from "@ant-design/icons";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 import SingleComment from "./SingleComment";
 import ReplyComment from "./ReplyComment";
 import { beURL } from "../../../../config/key";
 import { emailTrim } from "../../../../functions/emailtrim";
-import logo from "../../../../assets/logo_edit.png";
 
 const { TextArea } = Input;
 const { Title } = Typography;
 
 function Comments(props) {
-  const { user, isAuthenticated, isLoading, error } = useAuth0();
-  const { refreshFunction } = props;
+  const { user, isAuthenticated } = useAuth0();
   const [Comment, setComment] = useState("");
   const [openComment, setOpenComment] = useState(true);
   const [commentLoading, setLoading] = useState(false);

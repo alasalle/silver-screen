@@ -1,5 +1,5 @@
-import React, { useEffect, useState, Suspense } from "react";
-import { Typography, Popover, Button, Row } from "antd";
+import React, { useEffect, useState } from "react";
+import { Typography, Row } from "antd";
 import LoadingOverlay from "react-loading-overlay";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -13,7 +13,7 @@ import "./favorite.css";
 const { Title } = Typography;
 
 function FavoritePage() {
-  const { user, isAuthenticated, isLoading, error } = useAuth0();
+  const { user, isAuthenticated, isLoading } = useAuth0();
 
   const [Favorites, setFavorites] = useState([]);
   const [Loading, setLoading] = useState(true);
@@ -22,10 +22,12 @@ function FavoritePage() {
     if (!isLoading && isAuthenticated) {
       fetchFavoredMovie();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading]);
 
   const fetchFavoredMovie = () => {
     let username = emailTrim(user.email)
+    setLoading(true)
     axios
       .post(`${beURL}/api/favorites/fetchFavorites`, { userFrom: username })
       .then((response) => {
@@ -34,6 +36,7 @@ function FavoritePage() {
           setLoading(false);
         } else {
           alert("Failed to get subscription videos");
+          setLoading(false);
         }
       })
       .catch(err => console.log({BIG_OLE_ERR: err}))
@@ -56,7 +59,7 @@ function FavoritePage() {
       });
   };
 
-  if (isLoading)
+  if (isLoading || Loading)
     return <LoadingOverlay active={true} spinner text="Loading..." />;
 
   return (

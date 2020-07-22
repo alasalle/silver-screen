@@ -6,6 +6,7 @@ function ReplyComment(props) {
   const [OpenReplyComments, setOpenReplyComments] = useState(false);
   useEffect(() => {
     let commentNumber = 0;
+    // eslint-disable-next-line
     props.CommentLists.map((comment) => {
       if (comment.responseTo === props.parentCommentId) {
         commentNumber++;

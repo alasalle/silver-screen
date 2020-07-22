@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { Typography, Row, Button } from 'antd';
+import { Typography, Row } from 'antd';
 import { apiURL, apiKey, imageURL, imageSize, posterSize } from '../../../config/key';
 import MainImage from './Sections/MainImage'
 import GridCard from '../../commons/GridCard'
@@ -16,10 +16,12 @@ function LandingPage() {
     useEffect(() => {
         const endpoint = `${apiURL}/discover/movie?api_key=${apiKey}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`;
         fetchMovies(endpoint)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
         window.addEventListener("scroll", handleScroll);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
 

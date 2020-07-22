@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Avatar, Col, Typography, Row } from "antd";
+import { Card, Col } from "antd";
 import { imageURL } from "../../config/key";
 
 const { Meta } = Card;

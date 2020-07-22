@@ -3,7 +3,6 @@ import { Route, Switch } from "react-router-dom";
 import LoadingOverlay from 'react-loading-overlay';
 import LandingPage from "./views/LandingPage/LandingPage.js";
 import NavBar from "./views/NavBar/NavBar";
-import Footer from "./views/Footer/Footer";
 import MovieDetail from "./views/MovieDetail/MovieDetail";
 import FavoritePage from "./views/FavoritePage/FavoritePage";
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Input, Typography, Divider, Form, Avatar, Comment } from "antd";
+import { Button, Input, Form, Avatar, Comment } from "antd";
 import { CloseSquareTwoTone, CheckSquareTwoTone } from "@ant-design/icons";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -11,7 +11,7 @@ import logo from "../../../../assets/logo_edit.png";
 const { TextArea } = Input;
 
 function SingleComment(props) {
-  const { user, isAuthenticated, error, isLoading } = useAuth0();
+  const { user } = useAuth0();
   const { stateSetter, openComment, refreshFunction } = props;
   const username = emailTrim(user.email);
   const [CommentValue, setCommentValue] = useState("");

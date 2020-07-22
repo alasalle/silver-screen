@@ -5,10 +5,9 @@ import { Button, Divider } from 'antd';
 import { HeartTwoTone } from "@ant-design/icons"
 
 import { beURL } from '../../../../config/key';
-import { emailTrim } from "../../../../functions/emailtrim";
 
 function Favorite(props) {
-    const {user, isAuthenticated, error, isLoading } = useAuth0();
+    const { isAuthenticated } = useAuth0();
 
     const movieId = props.movieId
     const userFrom = props.userFrom
@@ -79,7 +78,7 @@ function Favorite(props) {
                     alert('Failed to get Favorite information')
                 }
             })
-
+            // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [FavoriteNumber, Favorited])
 
 
