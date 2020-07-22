@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { useAuth0 } from '@auth0/auth0-react';
-import { Button } from 'antd';
+import { Button, Divider } from 'antd';
+import { HeartTwoTone } from "@ant-design/icons"
 
 import { beURL } from '../../../../config/key';
 import { emailTrim } from "../../../../functions/emailtrim";
@@ -83,9 +84,10 @@ function Favorite(props) {
 
 
     return (
-        <>
-            <Button onClick={onClickFavorite} > {!Favorited ? "Add Favorite" : "Remove Favorite"} {FavoriteNumber}</Button>
-        </>
+        <div>
+            <Button type="default" icon={<HeartTwoTone twoToneColor={Favorited ? '#FF0000' : '#344655'}/>} size="large" onClick={onClickFavorite}><Divider type="vertical"/>{FavoriteNumber}</Button>
+            {/* <Button onClick={onClickFavorite} > {!Favorited ? "Add Favorite" : "Remove Favorite"} {FavoriteNumber}</Button> */}
+        </div>
     )
 }
 
