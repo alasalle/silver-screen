@@ -38,7 +38,6 @@ function Comments(props) {
       writer: username,
       postId: props.postId,
     };
-    // console.log(variables)
 
     axios
       .post(`${beURL}/api/comments/saveComment`, variables)
@@ -59,12 +58,9 @@ function Comments(props) {
       <br />
       <Title level={3}> Comments</Title>
       <hr />
-      {/* Comment Lists  */}
-      {/* {console.log(props.CommentLists)} */}
 
       {props.CommentLists &&
         props.CommentLists.map((comment, index) => {
-          // console.log({COMMENT: comment})
           return (
             !comment.responseTo && (
               <React.Fragment key={comment._id}>

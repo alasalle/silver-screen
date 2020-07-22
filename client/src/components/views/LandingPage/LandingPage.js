@@ -31,9 +31,6 @@ function LandingPage() {
             })
             .then(result => {
                 
-                // console.log(result)
-                // console.log('Movies',...Movies)
-                // console.log('result',...result.results)
                 setMovies([...Movies, ...result.results])
                 setMainMovieImage(MainMovieImage || result.results[0])
                 setCurrentPage(result.page)
@@ -45,7 +42,6 @@ function LandingPage() {
     const loadMoreItems = () => {
         let endpoint = '';
         setLoading(true)
-        // console.log('CurrentPage', CurrentPage)
         endpoint = `${apiURL}/discover/movie?api_key=${apiKey}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${CurrentPage + 1}`;
         fetchMovies(endpoint);
 
@@ -59,8 +55,6 @@ function LandingPage() {
         const windowBottom = windowHeight + window.pageYOffset;
         if (windowBottom >= docHeight - 1) {
 
-            // loadMoreItems()
-            // console.log('clicked')
             buttonRef.current.click();
 
         }

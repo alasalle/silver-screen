@@ -30,7 +30,6 @@ function LikeDislikes(props) {
 
         axios.post(`${beURL}/api/likes/getLikes`, variable)
             .then(response => {
-                // console.log('getLikes',response.data)
 
                 if (response.data.status) {
                     //How many likes does this video or comment have 
@@ -49,7 +48,6 @@ function LikeDislikes(props) {
 
         axios.post(`${beURL}/api/likes/getDislikes`, variable)
             .then(response => {
-                // console.log('getDislike',response.data)
                 if (response.data.status) {
                     //How many likes does this video or comment have 
                     setDislikes(response.data.dislikes.length)

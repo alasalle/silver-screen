@@ -34,7 +34,6 @@ function SingleComment(props) {
     stateSetter(true);
   };
 
-  // console.log({USER_ID: user})
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -79,7 +78,6 @@ function SingleComment(props) {
             Reply
           </span>,
         ];
-  console.log({ PROPS: props });
   return (
     <div>
       <Comment

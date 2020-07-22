@@ -38,7 +38,6 @@ function RightMenu(props) {
       </Menu>
     );
   } else {
-    // console.log({ERROR: error, AUTHED: isAuthenticated, USER: user})
     return (
 
       <Menu mode={props.mode}>

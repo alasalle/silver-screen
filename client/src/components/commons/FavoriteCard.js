@@ -9,7 +9,6 @@ const { Meta } = Card;
 function FavoriteCard(props) {
   let { key, image, movieId, movieName, duration, deleteFunc } = props;
 
-  console.log({PROPS: props})
 
   return (
     <Col key={key} lg={6} md={8} xs={24}>

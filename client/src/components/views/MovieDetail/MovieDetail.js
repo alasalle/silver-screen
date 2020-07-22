@@ -38,9 +38,7 @@ function MovieDetailPage(props) {
     axios
       .post(`${beURL}/api/comments/getComments`, movieVariable)
       .then((response) => {
-        // console.log(response)
         if (response.data.status) {
-          // console.log('response.data.comments', response.data.comments)
           setCommentLists(response.data.comments);
         } else {
           alert("Failed to get comments Info");
@@ -56,7 +54,6 @@ function MovieDetailPage(props) {
     fetch(endpoint)
       .then((result) => result.json())
       .then((result) => {
-        // console.log(result)
         setMovie(result);
         setLoadingForMovie(false);
 
@@ -64,7 +61,6 @@ function MovieDetailPage(props) {
         fetch(endpointForCasts)
           .then((result) => result.json())
           .then((result) => {
-            console.log({ CAST: result.cast });
             setCasts(result.cast);
           });
 
@@ -77,9 +73,7 @@ function MovieDetailPage(props) {
     axios
       .post(`${beURL}/api/comments/getComments`, movieVariable)
       .then((response) => {
-        // console.log(response)
         if (response.data.status) {
-          // console.log('response.data.comments', response.data.comments)
           setCommentLists(response.data.comments);
         } else {
           alert("Failed to get comments Info");

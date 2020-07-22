@@ -29,7 +29,6 @@ function FavoritePage() {
     axios
       .post(`${beURL}/api/favorites/fetchFavorites`, { userFrom: username })
       .then((response) => {
-        console.log({ RESPONSE: response });
         if (response.data.status) {
           setFavorites(response.data.faves);
           setLoading(false);
