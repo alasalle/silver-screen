@@ -122,8 +122,16 @@ function MovieDetailPage(props) {
         {ActorToggle && (
           <Row gutter={[16, 16]}>
             {!LoadingForCasts ? (
-              Casts.map(
-                (cast, index) =>
+              Casts.map((cast, index) => {
+                let name = cast.name.replace(/ /g, "%20");
+                let endpoint = `${apiURL}/search/person?api_key=${apiKey}&query=${name}`;
+                let actor_id = fetch(endpoint)
+                  .then((result) => result.json())
+                  .then((result) => {
+                    return result.results[0].id;
+                  });
+
+                return (
                   cast.profile_path && (
                     <React.Fragment key={index}>
                       <GridCards
@@ -132,10 +140,12 @@ function MovieDetailPage(props) {
                         characterName={cast.character}
                         name={cast.name}
                         keyProp={index}
+                        actor_id={actor_id}
                       />
                     </React.Fragment>
                   )
-              )
+                );
+              })
             ) : (
               <div>loading...</div>
             )}

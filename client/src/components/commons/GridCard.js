@@ -13,6 +13,7 @@ function GridCards(props) {
     movieName,
     characterName,
     name,
+    actor_id,
   } = props;
   const POSTER_SIZE = "w154";
 
@@ -20,19 +21,21 @@ function GridCards(props) {
     return (
       <Col key={keyProp} lg={6} md={8} xs={24}>
         <div style={{ position: "relative" }}>
-          <Card
-            hoverable
-            style={{ width: "100%" }}
-            cover={
-              <img
-                style={{ width: "100%" }}
-                alt={characterName}
-                src={`${imageURL}${POSTER_SIZE}${image}`}
-              />
-            }
-          >
-            <Meta title={name} description={`Character: ${characterName}`} />
-          </Card>
+          <a href={`/actor/${actor_id}`}>
+            <Card
+              hoverable
+              style={{ width: "100%" }}
+              cover={
+                <img
+                  style={{ width: "100%" }}
+                  alt={characterName}
+                  src={`${imageURL}${POSTER_SIZE}${image}`}
+                />
+              }
+            >
+              <Meta title={name} description={`Character: ${characterName}`} />
+            </Card>
+          </a>
         </div>
       </Col>
     );

@@ -17,6 +17,7 @@ function Footer() {
         {" "}
         Happy Coding <SmileTwoTone />
       </p>
+      <a href="/privacy-policy">Privacy Policy</a>
     </div>
   );
 }

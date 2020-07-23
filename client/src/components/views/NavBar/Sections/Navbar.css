@@ -47,6 +47,7 @@
 ul.ant-menu li button {
   border: 0;
   background-color: transparent;
+  cursor: pointer;
 }
 
 .menu__container .ant-menu-horizontal {
