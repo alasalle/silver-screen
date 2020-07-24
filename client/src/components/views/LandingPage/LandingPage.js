@@ -83,7 +83,7 @@ function LandingPage() {
       )}
 
       <div style={{ width: "85%", margin: "1rem auto" }}>
-        <Title level={2}> Latest Movies </Title>
+        <Title level={2}> Popular Movies </Title>
         <hr />
         <Row gutter={[16, 16]}>
           {Movies &&
