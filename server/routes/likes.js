@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { Like } = require("../models/Like");
 const { Dislike } = require("../models/Dislike");
+const { jwtCheck } = require("../middleware/auth");
 
 //=================================
 //             Likes DisLikes
@@ -35,7 +36,7 @@ router.post("/getDislikes", (req, res) => {
   });
 });
 
-router.post("/upLike", (req, res) => {
+router.post("/upLike", jwtCheck, (req, res) => {
   let variable = {};
   if (req.body.videoId) {
     variable = { videoId: req.body.videoId, userId: req.body.userId };
@@ -55,7 +56,7 @@ router.post("/upLike", (req, res) => {
   });
 });
 
-router.post("/unLike", (req, res) => {
+router.post("/unLike", jwtCheck, (req, res) => {
   let variable = {};
   if (req.body.videoId) {
     variable = { videoId: req.body.videoId, userId: req.body.userId };
@@ -69,7 +70,7 @@ router.post("/unLike", (req, res) => {
   });
 });
 
-router.post("/unDisLike", (req, res) => {
+router.post("/unDisLike", jwtCheck, (req, res) => {
   let variable = {};
   if (req.body.videoId) {
     variable = { videoId: req.body.videoId, userId: req.body.userId };
@@ -83,7 +84,7 @@ router.post("/unDisLike", (req, res) => {
   });
 });
 
-router.post("/upDisLike", (req, res) => {
+router.post("/upDisLike", jwtCheck, (req, res) => {
   let variable = {};
   if (req.body.videoId) {
     variable = { videoId: req.body.videoId, userId: req.body.userId };

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Input, Form, Avatar, Comment } from "antd";
 import { CloseSquareTwoTone, CheckSquareTwoTone } from "@ant-design/icons";
+import LoadingOverlay from "react-loading-overlay";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 import LikeDislikes from "./LikeDislikes";
@@ -11,9 +12,14 @@ import logo from "../../../../assets/logo_edit.png";
 const { TextArea } = Input;
 
 function SingleComment(props) {
-  const { user } = useAuth0();
+  const {
+    user,
+    isAuthenticated,
+    isLoading,
+    getAccessTokenSilently,
+  } = useAuth0();
   const { stateSetter, openComment, refreshFunction } = props;
-  const username = emailTrim(user.email);
+  const username = user ? emailTrim(user.email) : "";
   const [CommentValue, setCommentValue] = useState("");
   const [OpenReply, setOpenReply] = useState(false);
   const [commentLoading, setLoading] = useState(false);
@@ -34,10 +40,11 @@ function SingleComment(props) {
     stateSetter(true);
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const username = emailTrim(user.email);
+    const username = user ? emailTrim(user.email) : "";
+    const accessToken = await getAccessTokenSilently();
 
     const variables = {
       writer: username,
@@ -47,7 +54,11 @@ function SingleComment(props) {
     };
 
     axios
-      .post(`${beURL}/api/comments/saveComment`, variables)
+      .post(`${beURL}/api/comments/saveComment`, variables, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
       .then((response) => {
         if (response.data.status) {
           setCommentValue("");
@@ -64,29 +75,34 @@ function SingleComment(props) {
       });
   };
 
-  const actions =
-    props.comment.writer === emailTrim(user.email)
-      ? null
-      : [
-          <LikeDislikes
-            comment
-            commentId={props.comment._id}
-            userId={username}
-          />,
-          <span onClick={openReply} key="comment-basic-reply-to">
-            Reply
-          </span>,
-        ];
+  if (isLoading)
+    return <LoadingOverlay active={true} spinner text="Loading..." />;
+
   return (
     <div>
       <Comment
-        actions={actions}
+        actions={
+          isAuthenticated && user
+            ? props.comment.writer === emailTrim(user.email)
+              ? null
+              : [
+                  <LikeDislikes
+                    comment
+                    commentId={props.comment._id}
+                    userId={username}
+                  />,
+                  <span onClick={openReply} key="comment-basic-reply-to">
+                    Reply
+                  </span>,
+                ]
+            : null
+        }
         author={props.comment.writer}
         avatar={<Avatar src={logo} alt="image" />}
         content={<p>{props.comment.content}</p>}
       ></Comment>
 
-      {OpenReply && !openComment && (
+      {OpenReply && !openComment && isAuthenticated && (
         <>
           <Form.Item>
             <TextArea

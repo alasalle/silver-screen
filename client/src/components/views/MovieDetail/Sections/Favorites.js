@@ -7,10 +7,10 @@ import { HeartTwoTone } from "@ant-design/icons";
 import { beURL } from "../../../../config/key";
 
 function Favorite(props) {
-  const { isAuthenticated } = useAuth0();
+  const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
 
   const movieId = props.movieId;
-  const userFrom = props.userFrom;
+  const userFrom = user ? props.userFrom : "";
   const movieTitle = props.movieInfo.title;
   const moviePost = props.movieInfo.backdrop_path;
   const movieRunTime = props.movieInfo.runtime;
@@ -26,15 +26,21 @@ function Favorite(props) {
     movieRunTime: movieRunTime,
   };
 
-  const onClickFavorite = () => {
+  const onClickFavorite = async () => {
     if (!isAuthenticated) {
       return alert("Please Log in first");
     }
 
+    const accessToken = await getAccessTokenSilently();
+
     if (Favorited) {
       //when we are already subscribed
       axios
-        .post(`${beURL}/api/favorites/removeFromFavorite`, variables)
+        .post(`${beURL}/api/favorites/removeFromFavorite`, variables, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
         .then((response) => {
           if (response.data.status) {
             setFavoriteNumber(FavoriteNumber - 1);
@@ -47,7 +53,11 @@ function Favorite(props) {
       // when we are not subscribed yet
 
       axios
-        .post(`${beURL}/api/favorites/addToFavorites`, variables)
+        .post(`${beURL}/api/favorites/addToFavorites`, variables, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
         .then((response) => {
           if (response.data.status) {
             setFavoriteNumber(FavoriteNumber + 1);

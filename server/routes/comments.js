@@ -1,12 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const { Comment } = require("../models/Comment");
+const { jwtCheck } = require("../middleware/auth");
 
 //=================================
 //             Subscribe
 //=================================
 
-router.post("/saveComment", (req, res) => {
+router.post("/saveComment", jwtCheck, (req, res) => {
   const comment = new Comment(req.body);
 
   comment.save((err, comment) => {

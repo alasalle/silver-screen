@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const { Favorite } = require("../models/Favorite");
+const { jwtCheck } = require("../middleware/auth");
 
 //=================================
 //             Subscribe
@@ -31,7 +32,7 @@ router.post("/favorited", (req, res) => {
   });
 });
 
-router.post("/fetchFavorites", (req, res) => {
+router.post("/fetchFavorites", jwtCheck, (req, res) => {
   Favorite.find({
     userFrom: req.body.userFrom,
   }).exec((err, favorites) => {
@@ -41,7 +42,7 @@ router.post("/fetchFavorites", (req, res) => {
   });
 });
 
-router.post("/addToFavorites", (req, res) => {
+router.post("/addToFavorites", jwtCheck, (req, res) => {
   let fave = new Favorite(req.body);
 
   fave.save((err, favorite) => {
@@ -51,7 +52,7 @@ router.post("/addToFavorites", (req, res) => {
   });
 });
 
-router.post("/removeFromFavorite", (req, res) => {
+router.post("/removeFromFavorite", jwtCheck, (req, res) => {
   Favorite.deleteOne(
     { movieId: req.body.movieId, userFrom: req.body.userFrom },
     (err) => {

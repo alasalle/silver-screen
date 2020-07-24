@@ -24,12 +24,16 @@ function ReplyComment(props) {
               comment={comment}
               postId={props.postId}
               refreshFunction={props.refreshFunction}
+              stateSetter={props.stateSetter}
+              openCmment={props.openComment}
             />
             <ReplyComment
               CommentLists={props.CommentLists}
               parentCommentId={comment._id}
               postId={props.postId}
               refreshFunction={props.refreshFunction}
+              stateSetter={props.stateSetter}
+              openCmment={props.openComment}
             />
           </div>
         )}
@@ -62,7 +66,7 @@ function ReplyComment(props) {
           style={{
             fontSize: "14px",
             margin: 0,
-            color: "#1890ff",
+            color: "#FF0000",
             cursor: "pointer",
           }}
           onClick={handleChange}

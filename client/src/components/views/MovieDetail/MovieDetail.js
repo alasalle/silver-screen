@@ -99,13 +99,15 @@ function MovieDetailPage(props) {
 
       {/* Body */}
       <div style={{ width: "85%", margin: "1rem auto" }}>
-        <div style={{ display: "flex", justifyContent: "flex-end" }}>
-          <Favorite
-            movieInfo={Movie}
-            movieId={movieId}
-            userFrom={emailTrim(user.email)}
-          />
-        </div>
+        {user ? (
+          <div style={{ display: "flex", justifyContent: "flex-end" }}>
+            <Favorite
+              movieInfo={Movie}
+              movieId={movieId}
+              userFrom={user ? emailTrim(user.email) : ""}
+            />
+          </div>
+        ) : null}
 
         {/* Movie Info */}
         {!LoadingForMovie ? <MovieInfo movie={Movie} /> : <div>loading...</div>}
@@ -152,14 +154,6 @@ function MovieDetailPage(props) {
           </Row>
         )}
         <br />
-
-        {/* <div style={{ display: "flex", justifyContent: "center" }}>
-          <LikeDislikes
-            video
-            videoId={movieId}
-            userId={emailTrim(user.email)}
-          />
-        </div> */}
 
         {/* Comments */}
         <Comments

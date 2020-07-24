@@ -12,7 +12,7 @@ const { TextArea } = Input;
 const { Title } = Typography;
 
 function Comments(props) {
-  const { user, isAuthenticated } = useAuth0();
+  const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
   const [Comment, setComment] = useState("");
   const [openComment, setOpenComment] = useState(true);
   const [commentLoading, setLoading] = useState(false);
@@ -21,15 +21,12 @@ function Comments(props) {
     setComment(e.currentTarget.value);
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
-    if (!isAuthenticated) {
-      return alert("Please Log in first");
-    }
-
     const username = emailTrim(user.email);
+    const accessToken = await getAccessTokenSilently();
 
     const variables = {
       content: Comment,
@@ -38,7 +35,11 @@ function Comments(props) {
     };
 
     axios
-      .post(`${beURL}/api/comments/saveComment`, variables)
+      .post(`${beURL}/api/comments/saveComment`, variables, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
       .then((response) => {
         if (response.data.status) {
           setLoading(false);
@@ -70,6 +71,8 @@ function Comments(props) {
                   refreshFunction={props.refreshFunction}
                 />
                 <ReplyComment
+                  stateSetter={setOpenComment}
+                  openComment={openComment}
                   CommentLists={props.CommentLists}
                   postId={props.postId}
                   parentCommentId={comment._id}
@@ -93,7 +96,7 @@ function Comments(props) {
         </div>
       )}
 
-      {openComment && (
+      {openComment && isAuthenticated && (
         <>
           <Form.Item>
             <TextArea

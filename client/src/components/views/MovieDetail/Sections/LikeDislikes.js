@@ -8,7 +8,7 @@ import { beURL } from "../../../../config/key";
 import { emailTrim } from "../../../../functions/emailtrim";
 
 function LikeDislikes(props) {
-  const { user, isAuthenticated } = useAuth0();
+  const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
 
   const [Likes, setLikes] = useState(0);
   const [Dislikes, setDislikes] = useState(0);
@@ -60,68 +60,95 @@ function LikeDislikes(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const onLike = () => {
+  const onLike = async () => {
     if (!isAuthenticated) {
       return alert("Please login first");
     }
 
+    const accessToken = await getAccessTokenSilently();
     if (LikeAction === null) {
-      axios.post(`${beURL}/api/likes/upLike`, variable).then((response) => {
-        if (response.data.status) {
-          setLikes(Likes + 1);
-          setLikeAction("liked");
+      axios
+        .post(`${beURL}/api/likes/upLike`, variable, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+        .then((response) => {
+          if (response.data.status) {
+            setLikes(Likes + 1);
+            setLikeAction("liked");
 
-          //If dislike button is already clicked
+            //If dislike button is already clicked
 
-          if (DislikeAction !== null) {
-            setDislikeAction(null);
-            setDislikes(Dislikes - 1);
+            if (DislikeAction !== null) {
+              setDislikeAction(null);
+              setDislikes(Dislikes - 1);
+            }
+          } else {
+            alert("Failed to like");
           }
-        } else {
-          alert("Failed to like");
-        }
-      });
+        });
     } else {
-      axios.post(`${beURL}/api/likes/unLike`, variable).then((response) => {
-        if (response.data.status) {
-          setLikes(Likes - 1);
-          setLikeAction(null);
-        } else {
-          alert("Failed to unlike");
-        }
-      });
+      axios
+        .post(`${beURL}/api/likes/unLike`, variable, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+        .then((response) => {
+          if (response.data.status) {
+            setLikes(Likes - 1);
+            setLikeAction(null);
+          } else {
+            alert("Failed to unlike");
+          }
+        });
     }
   };
 
-  const onDisLike = () => {
+  const onDisLike = async () => {
     if (!isAuthenticated) {
       return alert("Please Log in first");
     }
 
-    if (DislikeAction !== null) {
-      axios.post(`${beURL}/api/likes/unDisLike`, variable).then((response) => {
-        if (response.data.status) {
-          setDislikes(Dislikes - 1);
-          setDislikeAction(null);
-        } else {
-          alert("Failed to undislike");
-        }
-      });
-    } else {
-      axios.post(`${beURL}/api/likes/upDisLike`, variable).then((response) => {
-        if (response.data.status) {
-          setDislikes(Dislikes + 1);
-          setDislikeAction("disliked");
+    const accessToken = await getAccessTokenSilently();
 
-          //If dislike button is already clicked
-          if (LikeAction !== null) {
-            setLikeAction(null);
-            setLikes(Likes - 1);
+    if (DislikeAction !== null) {
+      axios
+        .post(`${beURL}/api/likes/unDisLike`, variable, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+        .then((response) => {
+          if (response.data.status) {
+            setDislikes(Dislikes - 1);
+            setDislikeAction(null);
+          } else {
+            alert("Failed to undislike");
           }
-        } else {
-          alert("Failed to dislike");
-        }
-      });
+        });
+    } else {
+      axios
+        .post(`${beURL}/api/likes/upDisLike`, variable, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+        .then((response) => {
+          if (response.data.status) {
+            setDislikes(Dislikes + 1);
+            setDislikeAction("disliked");
+
+            //If dislike button is already clicked
+            if (LikeAction !== null) {
+              setLikeAction(null);
+              setLikes(Likes - 1);
+            }
+          } else {
+            alert("Failed to dislike");
+          }
+        });
     }
   };
 
