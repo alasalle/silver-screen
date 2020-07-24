@@ -1,7 +1,5 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const jwt = require("express-jwt");
-const jwks = require("jwks-rsa");
 const cors = require("cors");
 
 const config = require("./config/key");
@@ -9,6 +7,7 @@ const config = require("./config/key");
 const app = express();
 
 const mongoose = require("mongoose");
+
 const connect = mongoose
   .connect(config.mongoURI, {
     useNewUrlParser: true,
@@ -17,18 +16,6 @@ const connect = mongoose
   })
   .then(() => console.log("MongoDB Connected..."))
   .catch((err) => console.log(err));
-
-const jwtCheck = jwt({
-  secret: jwks.expressJwtSecret({
-    cache: true,
-    rateLimit: true,
-    jwksRequestsPerMinute: 5,
-    jwksUri: "https://silver-screen.us.auth0.com/.well-known/jwks.json",
-  }),
-  audience: "https://silver-screen.herokuapp.com/",
-  issuer: "https://silver-screen.us.auth0.com/",
-  algorithms: ["RS256"],
-});
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

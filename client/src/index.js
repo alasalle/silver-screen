@@ -11,6 +11,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Auth0Provider } from "@auth0/auth0-react";
 
 import Reducer from "./_reducers";
+import { authClientID, authDomain, authAudience } from "./config/key";
 import { Provider as ReduxProvider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import promiseMiddleware from "redux-promise";
@@ -24,10 +25,10 @@ const createStoreWithMiddleware = applyMiddleware(
 ReactDOM.render(
   <BrowserRouter>
     <Auth0Provider
-      domain="silver-screen.us.auth0.com"
-      clientId="Y1H30Yb8e0q70ib3pu9Id8E9Alf7gLjD"
+      domain={authDomain}
+      clientId={authClientID}
       redirectUri={window.location.origin}
-      audience="https://silver-screen.herokuapp.com/"
+      audience={authAudience}
     >
       <ReduxProvider
         store={createStoreWithMiddleware(

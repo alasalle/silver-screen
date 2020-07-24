@@ -6,4 +6,7 @@ module.exports = {
   backdropSize: process.env.REACT_APP_BACKDROP_SIZE,
   imageSize: process.env.REACT_APP_IMG_SIZE,
   posterSize: process.env.REACT_APP_POSTER_SIZE,
+  authClientID: process.env.REACT_APP_AUTH_CLIENT_ID,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  authAudience: process.env.REACT_APP_AUTH_AUDIENCE,
 };
