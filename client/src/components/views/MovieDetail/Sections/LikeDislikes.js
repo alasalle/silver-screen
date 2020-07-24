@@ -15,7 +15,7 @@ function LikeDislikes(props) {
   const [LikeAction, setLikeAction] = useState(null);
   const [DislikeAction, setDislikeAction] = useState(null);
   let variable = {};
-  let username = emailTrim(user.email);
+  let username = user.nickname ? user.nickname : emailTrim(user.email);
 
   if (props.video) {
     variable = { videoId: props.videoId, userId: username };

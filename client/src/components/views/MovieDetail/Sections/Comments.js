@@ -25,7 +25,7 @@ function Comments(props) {
     e.preventDefault();
     setLoading(true);
 
-    const username = emailTrim(user.email);
+    const username = user.nickname ? user.nickname : emailTrim(user.email);
     const accessToken = await getAccessTokenSilently();
 
     const variables = {

@@ -31,7 +31,7 @@ function FavoritePage() {
   }, [isLoading]);
 
   const fetchFavoredMovie = async () => {
-    let username = emailTrim(user.email);
+    let username = user.nickname ? user.nickname : emailTrim(user.email);
     const accessToken = await getAccessTokenSilently();
     axios
       .post(
@@ -56,7 +56,7 @@ function FavoritePage() {
   const onClickDelete = async (movieId) => {
     const variables = {
       movieId: movieId,
-      userFrom: emailTrim(user.email),
+      userFrom: user.nickname ? user.nickname : emailTrim(user.email),
     };
     const accessToken = await getAccessTokenSilently();
 
