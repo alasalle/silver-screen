@@ -5,7 +5,6 @@ import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 
 import { beURL } from "../../../../config/key";
-import { emailTrim } from "../../../../functions/emailtrim";
 
 function LikeDislikes(props) {
   const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();

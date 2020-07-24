@@ -6,7 +6,6 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 import { beURL, imageURL, posterSize } from "../../../config/key";
 import FavoriteCard from "../../commons/FavoriteCard";
-import { emailTrim } from "../../../functions/emailtrim";
 
 import "./favorite.css";
 

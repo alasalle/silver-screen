@@ -6,7 +6,6 @@ import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 import LikeDislikes from "./LikeDislikes";
 import { beURL } from "../../../../config/key";
-import { emailTrim } from "../../../../functions/emailtrim";
 import logo from "../../../../assets/logo_edit.png";
 
 const { TextArea } = Input;

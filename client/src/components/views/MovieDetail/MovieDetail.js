@@ -12,7 +12,6 @@ import {
   imageSize,
   beURL,
 } from "../../../config/key";
-import { emailTrim } from "../../../functions/emailtrim";
 import GridCards from "../../commons/GridCard";
 import MainImage from "../../views/LandingPage/Sections/MainImage";
 import MovieInfo from "./Sections/MovieInfo";
