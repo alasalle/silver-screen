@@ -19,7 +19,7 @@ function SingleComment(props) {
     getAccessTokenSilently,
   } = useAuth0();
   const { stateSetter, openComment, refreshFunction } = props;
-  const username = user ? emailTrim(user.email) : "";
+  const username = user ? user.nickname : "";
   const [CommentValue, setCommentValue] = useState("");
   const [OpenReply, setOpenReply] = useState(false);
   const [commentLoading, setLoading] = useState(false);
@@ -43,7 +43,7 @@ function SingleComment(props) {
   const onSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const username = user ? emailTrim(user.email) : "";
+    const username = user ? user.nickname : "";
     const accessToken = await getAccessTokenSilently();
 
     const variables = {
@@ -83,7 +83,7 @@ function SingleComment(props) {
       <Comment
         actions={
           isAuthenticated && user
-            ? props.comment.writer === emailTrim(user.email)
+            ? props.comment.writer === user.nickname
               ? null
               : [
                   <LikeDislikes

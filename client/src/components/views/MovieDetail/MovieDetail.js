@@ -104,7 +104,7 @@ function MovieDetailPage(props) {
             <Favorite
               movieInfo={Movie}
               movieId={movieId}
-              userFrom={user ? emailTrim(user.email) : ""}
+              userFrom={user ? user.nickname : ""}
             />
           </div>
         ) : null}
