@@ -43,7 +43,7 @@ function SingleComment(props) {
   const onSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const username = user ? user.nickname : "";
+    const username = user.nickname;
     const accessToken = await getAccessTokenSilently();
 
     const variables = {
